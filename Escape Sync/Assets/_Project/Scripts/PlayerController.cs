@@ -1,173 +1,148 @@
-using System; // Importing the System namespace for general utilities.
-using UnityEngine; // Importing UnityEngine for core Unity functionality.
-using UnityEngine.InputSystem; // Importing UnityEngine.InputSystem for handling player input.
+using UnityEngine;
 
-namespace COMP305 // Defining a namespace to organize the code within the COMP305 project.
+namespace COMP305
 {
-    // Ensures that this GameObject has a Rigidbody2D and BoxCollider2D component attached.
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
     public class PlayerController : MonoBehaviour
     {
-        [Header("Movement Values")]
-        [SerializeField] private float speed = 5.0f; // Speed of the player's movement
-        [SerializeField] private float jumpForce = 3.0f; // Strength of the player's jump
+        // Component References
+        private Animator animator; // Reference to the Animator component
+        private Rigidbody2D rb; // Reference to the Rigidbody2D component
 
-        private Rigidbody2D rb;
-        private BoxCollider2D boxCollider;
-        private Vector2 moveInput; // Stores the player's movement input values.
-        private bool isJumping = false; // Flag to check if the player is jumping.
+        [Header("Movement Variables")]
+        [SerializeField] private float jumpForce = 5f; // Force for the normal jump
+        [SerializeField] private float doubleJumpForce = 1f; // Force for the double jump
+        [SerializeField] private float runSpeed = 5f; // Speed at which the player runs
 
-        private InputSystem_Actions input; // Reference to the input system actions.
-        public string playerType; // Stores whether the player is "Player1" or "Player2".
+        // Conditonal Checks
+        private bool isGrounded; // To check if the player is grounded
+        private bool canDoubleJump; // To check if double jump is allowed
 
-        private Animator anim;
-        private bool isGrounded; // Flag to check if the player is on ground.
-        private bool canDoubleJump; // Flag to check if the player can double jump.
-
-        private void Awake()
+        void Start()
         {
+            // Initialize components
+            animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
-            boxCollider = GetComponent<BoxCollider2D>();
-            anim = GetComponent<Animator>();
-            input = new InputSystem_Actions();
         }
 
-        private void OnEnable()
+        void Update()
         {
-            // Setting up controls for Player1
-            if (playerType == "Player1")
+            // Check for spacebar input to jump or double jump
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                input.Player1.Move.performed += OnMove; // Registers OnMove function for movement input.
-                input.Player1.Move.canceled += OnMove; // Registers OnMove function when movement stops.
-                input.Player1.Jump.performed += OnJump; // Registers OnJump function for jump input.
-                input.Player1.Interact.performed += OnInteract; // Registers OnInteract function for interaction.
-                input.Player1.Enable(); // Enables input actions for Player1.
+                if (isGrounded)
+                {
+                    Jump(); // Jump if grounded
+                }
+                else if (canDoubleJump)
+                {
+                    DoubleJump(); // Double jump if in air and can double jump
+                }
             }
 
-            // Setting up controls for Player2
-            if (playerType == "Player2")
+            // If falling (downward linearVelocity), set the falling animation
+            if (rb.linearVelocity.y < -0.1 && !isGrounded)
             {
-                input.Player2.Move.performed += OnMove;
-                input.Player2.Move.canceled += OnMove;
-                input.Player2.Jump.performed += OnJump;
-                input.Player2.Interact.performed += OnInteract;
-                input.Player2.Enable(); // Enables input actions for Player2.
-            }
-        }
-
-        private void OnDisable()
-        {
-            // Removing event listeners for Player1
-            if (playerType == "Player1")
-            {
-                input.Player1.Move.performed -= OnMove;
-                input.Player1.Move.canceled -= OnMove;
-                input.Player1.Jump.performed -= OnJump;
-                input.Player1.Interact.performed -= OnInteract;
-                input.Player1.Disable(); // Disable input actions for Player2.
+                Falling();
             }
 
-            // Removing event listeners for Player2
-            if (playerType == "Player2")
+            // Update grounded status for animation purposes
+            if (isGrounded)
             {
-                input.Player2.Move.performed -= OnMove;
-                input.Player2.Move.canceled -= OnMove;
-                input.Player2.Jump.performed -= OnJump;
-                input.Player2.Interact.performed -= OnInteract;
-                input.Player2.Disable(); // Disable input actions for Player2.
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            // Move the player horizontally based on input
-            rb.linearVelocity = new Vector2(moveInput.x * speed, rb.linearVelocity.y);
-
-            // Handle jump logic
-            if (isJumping)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                isJumping = false; // Reset jump flag after jumping.
+                animator.SetBool("IsGrounded", true);
             }
 
-            // Update animator states
-            anim.SetBool("IsGrounded", isGrounded);
-            anim.SetBool("IsFalling", !isGrounded && rb.linearVelocity.y < -0.1f);
+            // Handle horizontal movement
+            float input = Input.GetAxis("Horizontal");
 
-            // Ensure idle state when the player is grounded and not moving
-            if (isGrounded && Mathf.Approximately(rb.linearVelocity.x, 0))
+            if (input < -0.1 || input > 0.1)
             {
-                anim.SetBool("IsIdle", true);
-                anim.SetBool("IsRunning", false);
+                Walk(); // Move left or right
             }
             else
             {
-                anim.SetBool("IsIdle", false);
+                Idle(); // If no input, make the character idle
             }
         }
 
-        private void OnMove(InputAction.CallbackContext context)
+        // Handles normal jump
+        private void Jump()
         {
-            moveInput = new Vector2(context.ReadValue<float>(), 0); // Read horizontal movement input.
-
-            if (moveInput.x != 0)
-            {
-                anim.SetBool("IsRunning", true);
-
-                // Flip player direction based on movement
-                float originalScaleX = Mathf.Abs(transform.localScale.x);
-                transform.localScale = new Vector3(originalScaleX * Mathf.Sign(moveInput.x), transform.localScale.y, transform.localScale.z);
-            }
-            else
-            {
-                anim.SetBool("IsRunning", false);
-                anim.SetBool("IsIdle", true); // Set idle animation if player stops moving.
-            }
+            animator.SetBool("IsJumping", true); // Play jumping animation
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Apply vertical jump force
+            canDoubleJump = true; // Allow double jump
+            isGrounded = false; // No longer grounded
+            animator.SetBool("IsGrounded", false);
+            animator.SetBool("IsIdle", false);
         }
 
-        private void OnJump(InputAction.CallbackContext context)
+        // Handles double jump
+        private void DoubleJump()
         {
-            if (context.performed && isGrounded)
-            {
-                isJumping = true;
-                isGrounded = false;
-                canDoubleJump = true;
-                anim.SetBool("IsJumping", true);
-            }
-            else if (context.performed && canDoubleJump)
-            {
-                isJumping = true;
-                canDoubleJump = false;
-                anim.SetTrigger("DoubleJump");
-            }
+            animator.SetBool("IsJumping", false); // End jumping animation
+            animator.SetTrigger("DoubleJump"); // Trigger double jump animation
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce); // Apply double jump force
+            canDoubleJump = false; // Disable double jump after use
+            animator.SetBool("IsFalling", false); // Reset falling state
         }
 
-        private void OnInteract(InputAction.CallbackContext context)
+        // Handles falling state
+        private void Falling()
         {
-            if (context.performed)
-            {
-                Debug.Log(playerType + " Interacted!"); // Logs interaction to the console.
-            }
+            animator.SetBool("IsFalling", true); // Play falling animation
+            animator.SetBool("IsDoubleJump", false); // Reset double jump animation
+            animator.SetBool("IsJumping", false); // Reset jumping animation
         }
 
+        // Collision detection when touching the ground
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground")) // Check if colliding with the ground.
+            if (collision.gameObject.CompareTag("Ground"))
             {
-                isGrounded = true;
-                anim.SetBool("IsJumping", false);
-                anim.SetBool("IsDoubleJump", false);
-                anim.SetBool("IsFalling", false);
+                isGrounded = true; // Player is on the ground
+                animator.SetBool("IsJumping", false); // Reset jump animation
+                animator.SetBool("IsDoubleJump", false); // Reset double jump animation
+                animator.SetBool("IsFalling", false); // Reset falling animation
+                canDoubleJump = false; // Reset double jump
+                animator.SetBool("IsIdle", true); // Set to idle when grounded
             }
         }
 
+        // Set grounded to false when exiting ground collision
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground")) // Detect when player leaves the ground.
+            if (collision.gameObject.CompareTag("Ground"))
             {
-                isGrounded = false;
+                isGrounded = false; // Player is no longer grounded
             }
+        }
+
+        // Handle walking (left/right movement)
+        private void Walk()
+        {
+            float input = Input.GetAxis("Horizontal"); // Get horizontal movement input
+
+            if (input < -0.1) // Move left
+            {
+                rb.linearVelocity = new Vector2(-runSpeed, rb.linearVelocity.y); // Apply left movement
+                transform.localScale = new Vector3(-1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Flip character
+                animator.SetBool("IsRunning", true); // Running animation
+                animator.SetBool("IsIdle", false);
+            }
+            else if (input > 0.1) // Move right
+            {
+                rb.linearVelocity = new Vector2(runSpeed, rb.linearVelocity.y); // Apply right movement
+                transform.localScale = new Vector3(1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Keep character facing right
+                animator.SetBool("IsRunning", true); // Running animation
+                animator.SetBool("IsIdle", false);
+            }
+        }
+
+        // Handle idle state (no movement)
+        private void Idle()
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // Stop horizontal movement
+            animator.SetBool("IsRunning", false); // Stop running animation
+            animator.SetBool("IsIdle", true); // Idle animation
         }
     }
 }
