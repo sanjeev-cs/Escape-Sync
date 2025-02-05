@@ -10,7 +10,7 @@ namespace COMP305
         public float doubleJumpForce = 1f;
         private bool isGrounded;
         private bool canDoubleJump; // 添加双重跳跃的状态
-        public float runSpeed =1f;
+        public float runSpeed = 1f;
 
         void Start()
         {
@@ -34,10 +34,12 @@ namespace COMP305
                     DoubleJump();
                 }
             }
-            if (rb.linearVelocity.y < -0.1 && !isGrounded) {
+            if (rb.linearVelocity.y < -0.1 && !isGrounded)
+            {
                 Falling();
             }
-            if (isGrounded) {
+            if (isGrounded)
+            {
 
                 animator.SetBool("IsGrounded", true);
             }
@@ -49,11 +51,12 @@ namespace COMP305
                 Walk();
 
             }
-            else {
+            else
+            {
 
                 Idle();
             }
-            
+
 
         }
 
@@ -67,7 +70,6 @@ namespace COMP305
             canDoubleJump = true; // 允许双重跳跃
             animator.SetBool("IsGrounded", false);
             animator.SetBool("IsIdle", false);
-
         }
 
         private void DoubleJump()
@@ -80,7 +82,7 @@ namespace COMP305
         }
         private void Falling()
         {
-            
+
             animator.SetBool("IsFalling", true);
             animator.SetBool("IsDoubleJump", false);
             animator.SetBool("IsJumping", false);
@@ -88,11 +90,6 @@ namespace COMP305
 
 
         }
-
-       
-
-       
-        
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -108,14 +105,12 @@ namespace COMP305
             }
         }
 
-        
-
         private void OnCollisionExit2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = false; // 离开地面时标记为不在地面
-               
+
             }
         }
 
@@ -141,17 +136,15 @@ namespace COMP305
 
                 Debug.Log("D pressed");
             }
-            
-
-
         }
 
-        private void Idle() {
-                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-                animator.SetBool("IsRunning", false);
-                animator.SetBool("IsIdle", true);
-                Debug.Log("stopped");
+        private void Idle()
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsIdle", true);
+            Debug.Log("stopped");
         }
-        
+
     }
 }
