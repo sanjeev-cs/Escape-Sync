@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace COMP305
@@ -7,27 +8,39 @@ namespace COMP305
         // Component References
         private Animator animator; // Reference to the Animator component
         private Rigidbody2D rb; // Reference to the Rigidbody2D component
+        private BoxCollider2D boxCollider;
 
         [Header("Movement Variables")]
         [SerializeField] private float jumpForce = 5f; // Force for the normal jump
         [SerializeField] private float doubleJumpForce = 1f; // Force for the double jump
         [SerializeField] private float runSpeed = 5f; // Speed at which the player runs
+        [SerializeField] private float airControlFactor = 0.5f;
 
         // Conditonal Checks
         private bool isGrounded; // To check if the player is grounded
         private bool canDoubleJump; // To check if double jump is allowed
 
-        void Start()
+        [Header("Player Controls")]
+        [SerializeField] private KeyCode leftKey; // Key for moving left
+        [SerializeField] private KeyCode rightKey; // Key for moving right
+        [SerializeField] private KeyCode jumpKey; // Key for jumping
+        [SerializeField] private KeyCode interactKey; // Key for interaction (if needed)
+
+
+
+        private void Start()
         {
             // Initialize components
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
+            boxCollider = GetComponent<BoxCollider2D>();
         }
 
-        void Update()
+        private void Update()
         {
-            // Check for spacebar input to jump or double jump
-            if (Input.GetKeyDown(KeyCode.Space))
+
+            // Check for jump or double jump
+            if (Input.GetKeyDown(jumpKey))
             {
                 if (isGrounded)
                 {
@@ -51,17 +64,21 @@ namespace COMP305
                 animator.SetBool("IsGrounded", true);
             }
 
-            // Handle horizontal movement
-            float input = Input.GetAxis("Horizontal");
-
-            if (input < -0.1 || input > 0.1)
+            // Handle horizontal movement based on left/right input
+            if (Input.GetKey(leftKey))
             {
-                Walk(); // Move left or right
+                Walk(-1); // Move left
+            }
+            else if (Input.GetKey(rightKey))
+            {
+                Walk(1); // Move right
             }
             else
             {
                 Idle(); // If no input, make the character idle
             }
+
+
         }
 
         // Handles normal jump
@@ -72,7 +89,6 @@ namespace COMP305
             canDoubleJump = true; // Allow double jump
             isGrounded = false; // No longer grounded
             animator.SetBool("IsGrounded", false);
-            animator.SetBool("IsIdle", false);
         }
 
         // Handles double jump
@@ -80,7 +96,7 @@ namespace COMP305
         {
             animator.SetBool("IsJumping", false); // End jumping animation
             animator.SetTrigger("DoubleJump"); // Trigger double jump animation
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce); // Apply double jump force
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
             canDoubleJump = false; // Disable double jump after use
             animator.SetBool("IsFalling", false); // Reset falling state
         }
@@ -89,7 +105,6 @@ namespace COMP305
         private void Falling()
         {
             animator.SetBool("IsFalling", true); // Play falling animation
-            animator.SetBool("IsDoubleJump", false); // Reset double jump animation
             animator.SetBool("IsJumping", false); // Reset jumping animation
         }
 
@@ -103,7 +118,11 @@ namespace COMP305
                 animator.SetBool("IsDoubleJump", false); // Reset double jump animation
                 animator.SetBool("IsFalling", false); // Reset falling animation
                 canDoubleJump = false; // Reset double jump
-                animator.SetBool("IsIdle", true); // Set to idle when grounded
+            }
+
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                boxCollider.enabled = false;
             }
         }
 
@@ -114,27 +133,21 @@ namespace COMP305
             {
                 isGrounded = false; // Player is no longer grounded
             }
+
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                boxCollider.enabled = true;
+            }
         }
 
-        // Handle walking (left/right movement)
-        private void Walk()
-        {
-            float input = Input.GetAxis("Horizontal"); // Get horizontal movement input
 
-            if (input < -0.1) // Move left
-            {
-                rb.linearVelocity = new Vector2(-runSpeed, rb.linearVelocity.y); // Apply left movement
-                transform.localScale = new Vector3(-1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Flip character
-                animator.SetBool("IsRunning", true); // Running animation
-                animator.SetBool("IsIdle", false);
-            }
-            else if (input > 0.1) // Move right
-            {
-                rb.linearVelocity = new Vector2(runSpeed, rb.linearVelocity.y); // Apply right movement
-                transform.localScale = new Vector3(1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Keep character facing right
-                animator.SetBool("IsRunning", true); // Running animation
-                animator.SetBool("IsIdle", false);
-            }
+        // Handle walking (left/right movement)
+        private void Walk(int direction)
+        {
+            float speed = isGrounded ? runSpeed : runSpeed * airControlFactor;
+            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y); // Apply left or right movement
+            transform.localScale = new Vector3(direction * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Flip character based on direction
+            animator.SetBool("IsRunning", true); // Running animation
         }
 
         // Handle idle state (no movement)
