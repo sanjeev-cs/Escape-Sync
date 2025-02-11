@@ -45,6 +45,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.dwlt
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -60,7 +61,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
-Escape Sync/UserSettings/Search.settings
-Escape Sync/UserSettings/Layouts/default-6000.dwlt
-
