@@ -4,7 +4,7 @@ using UnityEngine;
 namespace COMP305
 {
     [RequireComponent(typeof(Camera))]
-    public class MultipleTargetCamera : MonoBehaviour
+    public class CameraControllerMultiple : MonoBehaviour
     {
         [SerializeField] private List<Transform> targets = new List<Transform>();
         [SerializeField] private Vector3 offset;

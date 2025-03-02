@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
+//using System.Collections.Generic;
 using UnityEngine;
 
 namespace COMP305
 {
-    public class CameraFollow : MonoBehaviour
+    public class CameraController : MonoBehaviour
     {
         [Header("Camera Variables")]
         [SerializeField] private Transform target;
