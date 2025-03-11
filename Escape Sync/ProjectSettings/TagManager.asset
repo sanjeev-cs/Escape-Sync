@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - FLoatingPlatfrom
   layers:
   - Default
   - TransparentFX
@@ -12,10 +13,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - Background
+  - Foreground
   - 
   - 
   - 
@@ -41,6 +42,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Backgound
+    uniqueID: 1149872981
+    locked: 0
+  - name: Foreground
+    uniqueID: 629222169
+    locked: 0
+  - name: Enemy
+    uniqueID: 3840200921
+    locked: 0
+  - name: Player
+    uniqueID: 1879878317
     locked: 0
   m_RenderingLayers:
   - Default
