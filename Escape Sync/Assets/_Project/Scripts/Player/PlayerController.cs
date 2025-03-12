@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace COMP305
@@ -108,7 +107,7 @@ namespace COMP305
             animator.SetBool("IsJumping", false); // Reset jumping animation
         }
 
-        // Collision detection when touching the ground
+        // Collision detection when touching the ground and floating platfrom
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Ground"))
@@ -132,11 +131,6 @@ namespace COMP305
             if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = false; // Player is no longer grounded
-            }
-
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                boxCollider.enabled = true;
             }
         }
 
