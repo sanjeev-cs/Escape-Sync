@@ -119,10 +119,10 @@ namespace COMP305
                 canDoubleJump = false; // Reset double jump
             }
 
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                boxCollider.enabled = false;
-            }
+            //if (collision.gameObject.CompareTag("Player"))
+            //{
+            //    boxCollider.enabled = false;
+            //}
         }
 
         // Set grounded to false when exiting ground collision
