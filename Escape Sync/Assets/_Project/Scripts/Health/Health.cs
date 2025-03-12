@@ -53,7 +53,7 @@ namespace COMP305
                 }
 
                 // Trigger death animation and disable movement.
-                anim.SetTrigger("IsGround");
+                anim.SetTrigger("IsGrounded");
                 //anim.SetTrigger("die");
 
                 dead = true;
