@@ -8283,7 +8283,7 @@ GameObject:
   - component: {fileID: 418337207}
   - component: {fileID: 418337208}
   - component: {fileID: 418337209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -8492,6 +8492,7 @@ MonoBehaviour:
   numberOfFlashes: 0
   components:
   - {fileID: 418337207}
+  - {fileID: 418337208}
   deathSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
   hurtSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
 --- !u!1001 &430241268
@@ -8899,7 +8900,7 @@ SpriteRenderer:
   m_SortingLayerID: 629222169
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1323499970, guid: 413986c4a668c374d8de72a47621b531, type: 3}
+  m_Sprite: {fileID: 486728490, guid: 413986c4a668c374d8de72a47621b531, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9005,7 +9006,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.43, y: 0.17}
+    oldSize: {x: 0.44, y: 0.12}
     newSize: {x: 0.43, y: 0.17}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9051,7 +9052,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.43, y: 0.17}
+    oldSize: {x: 0.44, y: 0.12}
     newSize: {x: 0.43, y: 0.17}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9183,6 +9184,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1879878317
       objectReference: {fileID: 0}
+    - target: {fileID: 7283754523466399010, guid: 2e94967dfadd7534698a05ae29d0c055, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7933656125676720726, guid: 2e94967dfadd7534698a05ae29d0c055, type: 3}
       propertyPath: m_LocalPosition.x
       value: 61.36332
@@ -9277,7 +9282,7 @@ GameObject:
   - component: {fileID: 815250741}
   - component: {fileID: 815250746}
   - component: {fileID: 815250747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player (2)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -9486,6 +9491,7 @@ MonoBehaviour:
   numberOfFlashes: 0
   components:
   - {fileID: 815250741}
+  - {fileID: 815250746}
   deathSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
   hurtSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
 --- !u!1 &860618597
@@ -9532,9 +9538,9 @@ GameObject:
   - component: {fileID: 1033199856}
   - component: {fileID: 1033199857}
   - component: {fileID: 1033199858}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Saw
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
