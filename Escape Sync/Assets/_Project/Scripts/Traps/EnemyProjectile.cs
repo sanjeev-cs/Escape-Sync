@@ -26,7 +26,7 @@ namespace COMP305
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private new void OnTriggerEnter2D(Collider2D collision)
         {
             // Logic for what happens when the projectile collides with something.
             base.OnTriggerEnter2D(collision); //  Execute the logic from the parent script first
