@@ -4,50 +4,93 @@ namespace COMP305
 {
     public class EnemySideways : MonoBehaviour
     {
-        [SerializeField] private float movementDistance;
-        [SerializeField] private float speed;
-        [SerializeField] private float damage;
-        private bool movingLeft;
-        private float rightEdge;
-        private float leftEdge;
+        [SerializeField] private float horizontalMovementRange; // How far the enemy moves horizontally (left-right)
+        [SerializeField] private float verticalMovementRange; // How far the enemy moves vertically (up-down)
+        [SerializeField] private float movementSpeed; // Speed at which the enemy moves
+        [SerializeField] private float damageAmount; // Damage dealt when colliding with the player
+
+        // Variables for horizontal movement (left-right)
+        private bool isMovingLeft;
+        private float leftBoundary;
+        private float rightBoundary;
+
+        // Variables for vertical movement (up-down)
+        private bool isMovingUp; 
+        private float topBoundary;
+        private float bottomBoundary;
 
         private void Awake()
         {
-            leftEdge = transform.position.x - movementDistance;
-            rightEdge = transform.position.x + movementDistance;
+            // Boundaries for horizontal movement based on the starting position
+            leftBoundary = transform.position.x - horizontalMovementRange;
+            rightBoundary = transform.position.x + horizontalMovementRange;
+
+            // Boundaries for vertical movement based on the starting position
+            topBoundary = transform.position.y + verticalMovementRange;
+            bottomBoundary = transform.position.y - verticalMovementRange;
         }
 
         private void Update()
         {
-            if (movingLeft)
+            // Handle horizontal movement (left and right)
+            if (isMovingLeft)
             {
-                if (transform.position.x > leftEdge)
+                // Move left if the current position is greater than the left boundary
+                if (transform.position.x > leftBoundary)
                 {
-                    transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
+                    transform.position -= new Vector3(movementSpeed * Time.deltaTime, 0, 0); // Move left
                 }
                 else
                 {
-                    movingLeft = false;
+                    isMovingLeft = false; // Change direction to right when the left boundary is reached
                 }
             }
-            if (!movingLeft)
+            else
             {
-                if (transform.position.x < rightEdge)
+                // Move right if the current position is less than the right boundary
+                if (transform.position.x < rightBoundary)
                 {
-                    transform.position = new Vector3(transform.position.x + speed * Time.deltaTime, transform.position.y, transform.position.z);
+                    transform.position += new Vector3(movementSpeed * Time.deltaTime, 0, 0); // Move right
                 }
                 else
                 {
-                    movingLeft = true;
+                    isMovingLeft = true; // Change direction to left when the right boundary is reached
+                }
+            }
+
+            // Handle vertical movement (up and down)
+            if (isMovingUp)
+            {
+                // Move up if the current position is greater than the top boundary
+                if (transform.position.y < topBoundary)
+                {
+                    transform.position += new Vector3(0, movementSpeed * Time.deltaTime, 0); // Move up
+                }
+                else
+                {
+                    isMovingUp = false; // Change direction to down when the top boundary is reached
+                }
+            }
+            else
+            {
+                // Move down if the current position is greater than the bottom boundary
+                if (transform.position.y > bottomBoundary)
+                {
+                    transform.position -= new Vector3(0, movementSpeed * Time.deltaTime, 0); // Move down
+                }
+                else
+                {
+                    isMovingUp = true; // Change direction to up when the bottom boundary is reached
                 }
             }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player")
+            // Check if the enemy collided with the player and apply damage
+            if (collision.CompareTag("Player"))
             {
-                collision.GetComponent<Health>().TakeDamage(damage);
+                collision.GetComponent<Health>().TakeDamage(damageAmount); // Apply damage to the player's health
             }
         }
     }

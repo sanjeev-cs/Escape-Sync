@@ -38,12 +38,12 @@ namespace COMP305
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player")
+            if (collision.CompareTag("Player"))
             {
                 playerHealth = collision.GetComponent<Health>();
                 if (!triggered)
                 {
-                    // Trigger the fire trap
+                    // Trigger the firetrap
                     StartCoroutine(ActivateFireTrap());
 
                 }
@@ -56,7 +56,7 @@ namespace COMP305
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.tag == "Player")
+            if (collision.CompareTag("Player"))
             {
                 playerHealth = null;
             }

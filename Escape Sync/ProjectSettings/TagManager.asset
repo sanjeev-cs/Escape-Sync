@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Platform
   - Enemy
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Background
   - Foreground
   - Enemy
-  - 
+  - Collectible
   - 
   - 
   - 
@@ -50,11 +51,11 @@ TagManager:
   - name: Foreground
     uniqueID: 629222169
     locked: 0
-  - name: Enemy
-    uniqueID: 3840200921
+  - name: Ground
+    uniqueID: 1879878317
     locked: 0
   - name: Player
-    uniqueID: 1879878317
+    uniqueID: 3840200921
     locked: 0
   m_RenderingLayers:
   - Default
