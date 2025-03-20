@@ -75,7 +75,7 @@ namespace COMP305
             active = true;
             anim.SetBool("activated", true);
 
-            // Wait untill x seconds, deactivate trap, reset all variables and animatio to idle
+            // Wait until x seconds, deactivate trap, reset all variables and animatio to idle
             yield return new WaitForSeconds(activeTime);
             active = false;
             triggered = false;

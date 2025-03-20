@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4108754371511089641}
   - component: {fileID: 1955947413556317065}
   - component: {fileID: 5948774243586451242}
+  - component: {fileID: 8171957441257802227}
   m_Layer: 0
   m_Name: ChainedSpike
   m_TagString: Enemy
@@ -238,3 +239,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2735379, y: 0.27522063}
   m_EdgeRadius: 0
+--- !u!114 &8171957441257802227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143551498017670986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a55bfbdeb38c04ab8f6b9886a24d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
