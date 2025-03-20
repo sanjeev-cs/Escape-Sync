@@ -24,12 +24,15 @@ namespace COMP305
         [SerializeField] private KeyCode rightKey; // Key for moving right
         [SerializeField] private KeyCode jumpKey; // Key for jumping
         [SerializeField] private KeyCode interactKey; // Key for interaction (if needed)
-
-
+        
+        // Interactable Game Icon
+        public GameObject interactIcon;
 
         private void Start()
         {
             // Initialize components
+            // interactIcon.SetActive(false);
+            
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             boxCollider = GetComponent<BoxCollider2D>();
@@ -77,6 +80,14 @@ namespace COMP305
                 Idle(); // If no input, make the character idle
             }
 
+            // Ignore the collision with another player
+            Physics2D.IgnoreLayerCollision(6, 6, true); 
+            
+            // Check if the interact key is pressed
+            if (Input.GetKeyDown(interactKey))
+            {
+                CheckInteraction();
+            }
 
         }
 
@@ -150,6 +161,21 @@ namespace COMP305
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y); // Stop horizontal movement
             animator.SetBool("IsRunning", false); // Stop running animation
             animator.SetBool("IsIdle", true); // Idle animation
+        }
+
+        public void OpenInteractableIcon()
+        {
+            interactIcon.SetActive(true);
+        }
+        
+        public void CloseInteractableIcon()
+        {
+            interactIcon.SetActive(false);
+        }
+
+        private void CheckInteraction()
+        {
+            
         }
     }
 }
