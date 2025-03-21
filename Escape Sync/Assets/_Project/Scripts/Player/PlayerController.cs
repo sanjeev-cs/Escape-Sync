@@ -23,7 +23,7 @@ namespace COMP305
         [SerializeField] private KeyCode leftKey; // Key for moving left
         [SerializeField] private KeyCode rightKey; // Key for moving right
         [SerializeField] private KeyCode jumpKey; // Key for jumping
-        [SerializeField] private KeyCode interactKey; // Key for interaction (if needed)
+        public KeyCode interactKey; // Key for interaction (if needed)
         
         // Interactable Game Icon
         public GameObject interactIcon;
@@ -87,6 +87,15 @@ namespace COMP305
             if (Input.GetKeyDown(interactKey))
             {
                 CheckInteraction();
+            }
+
+            if (Input.GetKey(interactKey))
+            {
+                InteractionEventManager.OnInteractKeyHeld();
+            } 
+            else if (!Input.GetKey(interactKey))
+            {
+                InteractionEventManager.OnInteractKeyReleased();
             }
 
         }
@@ -177,5 +186,6 @@ namespace COMP305
         {
             
         }
+
     }
 }
