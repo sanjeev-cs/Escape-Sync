@@ -9,16 +9,19 @@ namespace COMP305
         [SerializeField] private string objectID; // Unique identifier for this object
         private PlayerController playerController;
         private bool isInteracting = false;
+        private Animator anim;
         private void OnEnable()
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true; // Ensures the collider is set as a trigger
-            InteractionEventManager.InteractKeyHeld += InteractKeyPressed;
-            InteractionEventManager.InteractKeyReleased += InteractKeyReleased;
+            anim = gameObject.GetComponent<Animator>();
+            InteractionEventManager.InteractKeyPressed += InteractKeyPressed;
+            // InteractionEventManager.InteractKeyReleased += InteractKeyReleased;
         }
 
         private void OnDisable()
         {
-            InteractionEventManager.InteractKeyHeld -= InteractKeyPressed;
+            InteractionEventManager.InteractKeyPressed -= InteractKeyPressed;
+            // InteractionEventManager.InteractKeyReleased -= InteractKeyReleased;
         }
 
         private void InteractKeyPressed()
@@ -26,17 +29,20 @@ namespace COMP305
             isInteracting = true;
         }
         
-        private void InteractKeyReleased()
-        {
-            isInteracting = false;
-        }
+        // private void InteractKeyReleased()
+        // {
+        //     isInteracting = false;
+        // }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
-                if(isInteracting)
+                if (isInteracting)
+                {
                     Interact();
+                    anim.SetBool("Interact", true);
+                }
             }
         }
 
@@ -45,6 +51,8 @@ namespace COMP305
             if (collision.CompareTag("Player"))
             {
                 StopInteract();
+                isInteracting = false;
+                anim.SetBool("Interact", false);
             }
         }
 

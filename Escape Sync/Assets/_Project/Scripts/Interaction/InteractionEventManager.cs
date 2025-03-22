@@ -8,8 +8,8 @@ namespace COMP305
         // Event for when the player collides with an interactable object
         public static event Action<string> PlayerEnteredInteractable;
         public static event Action<string> PlayerExitedInteractable;
-        public static event Action InteractKeyHeld;
-        public static event Action InteractKeyReleased;
+        public static event Action InteractKeyPressed;
+        // public static event Action InteractKeyReleased;
         
 
         public static void NotifyPlayerEntered(string objectID)
@@ -22,14 +22,14 @@ namespace COMP305
             PlayerExitedInteractable?.Invoke(objectID);
         }
 
-        public static void OnInteractKeyHeld()
+        public static void OnInteractKeyPressed()
         {
-            InteractKeyHeld?.Invoke();
+            InteractKeyPressed?.Invoke();
         }
 
-        public static void OnInteractKeyReleased()
-        {
-            InteractKeyReleased?.Invoke();
-        }
+        // public static void OnInteractKeyReleased()
+        // {
+        //     InteractKeyReleased?.Invoke();
+        // }
     }
 }

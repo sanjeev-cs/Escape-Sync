@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Collectible
   - MovingPlatform
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Foreground
   - Enemy
   - Collectible
-  - 
+  - Interactable
   - 
   - 
   - 

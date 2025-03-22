@@ -41,7 +41,6 @@ namespace COMP305
 
         private void Update()
         {
-
             // Check for jump or double jump
             if (Input.GetKeyDown(jumpKey))
             {
@@ -85,19 +84,19 @@ namespace COMP305
             Physics2D.IgnoreLayerCollision(6, 6, true); 
             
             // Check if the interact key is pressed
+            // if (Input.GetKeyDown(interactKey))
+            // {
+            //     CheckInteraction();
+            // }
+
             if (Input.GetKeyDown(interactKey))
             {
-                CheckInteraction();
-            }
-
-            if (Input.GetKey(interactKey))
-            {
-                InteractionEventManager.OnInteractKeyHeld();
+                InteractionEventManager.OnInteractKeyPressed();
             } 
-            else if (!Input.GetKey(interactKey))
-            {
-                InteractionEventManager.OnInteractKeyReleased();
-            }
+            // else
+            // {
+            //     InteractionEventManager.OnInteractKeyReleased();
+            // }
 
         }
 
@@ -180,7 +179,7 @@ namespace COMP305
             }
             if (collision.gameObject.CompareTag("MovingPlatform"))
             {
-                transform.parent = null; // 或者调回到原父对象
+                transform.parent = null; 
                 StartCoroutine(RemoveParentWithDelay());
             }
         }
@@ -213,10 +212,10 @@ namespace COMP305
             interactIcon.SetActive(false);
         }
 
-        private void CheckInteraction()
-        {
-            
-        }
+        // private void CheckInteraction()
+        // {
+        //     
+        // }
 
     }
 }

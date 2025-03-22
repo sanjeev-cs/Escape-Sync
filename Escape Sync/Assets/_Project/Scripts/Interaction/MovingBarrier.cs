@@ -8,7 +8,7 @@ namespace COMP305
         [SerializeField] private string linkedObjectID; // ID of the interactable object
         [SerializeField] private Vector3 targetPosition;
         [SerializeField] private float movingSpeed;
-        private Vector3 originalPosition;
+        private Vector3 originalPosition;   
         private Coroutine movementCoroutine;
 
         private void Awake()
@@ -46,7 +46,7 @@ namespace COMP305
 
         private void StartMoving(Vector3 destination)
         {
-            Debug.Log($"Moving barrier {gameObject.name} to {destination}");
+            // Debug.Log($"Moving barrier {gameObject.name} to {destination}");
             if (movementCoroutine != null)
             {
                 StopCoroutine(movementCoroutine);
