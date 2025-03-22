@@ -27,6 +27,7 @@ namespace COMP305
                 // 播放消失动画
                 animator.SetTrigger("Disappear");
                 audioSource.PlayOneShot(hoverSound);
+                hasPlayedSound = true;
 
                 // 更新分数
                 // gameManager.AddScore(1);

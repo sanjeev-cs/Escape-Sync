@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace COMP305
 {
@@ -128,6 +129,15 @@ namespace COMP305
                 animator.SetBool("IsDoubleJump", false); // Reset double jump animation
                 animator.SetBool("IsFalling", false); // Reset falling animation
                 canDoubleJump = false; // Reset double jump
+
+              
+            }
+            if (collision.gameObject.CompareTag("MovingPlatform"))
+            {
+                isGrounded = true;
+                StartCoroutine(SetParentWithDelay(collision.transform));
+                //yield return new WaitForEndOfFrame();
+                transform.parent = collision.transform;
             }
 
             //if (collision.gameObject.CompareTag("Player"))
@@ -135,6 +145,21 @@ namespace COMP305
             //    boxCollider.enabled = false;
             //}
         }
+        private IEnumerator SetParentWithDelay(Transform newParent)
+        {
+            // wait for one frame
+            yield return new WaitForEndOfFrame();
+            transform.parent = newParent;
+        }
+
+        private IEnumerator RemoveParentWithDelay()
+        {
+            // wait for one frame
+            yield return new WaitForEndOfFrame();
+            transform.parent = null; // set original parentback
+
+        }
+
 
         // Set grounded to false when exiting ground collision
         private void OnCollisionExit2D(Collision2D collision)
@@ -142,6 +167,12 @@ namespace COMP305
             if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = false; // Player is no longer grounded
+                
+            }
+            if (collision.gameObject.CompareTag("MovingPlatform"))
+            {
+                transform.parent = null; // 或者调回到原父对象
+                StartCoroutine(RemoveParentWithDelay());
             }
         }
 
@@ -177,5 +208,6 @@ namespace COMP305
         {
             
         }
+
     }
 }
