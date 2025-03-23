@@ -215,5 +215,6 @@ namespace COMP305
             // Determines if the player can attack (must be grounded and not moving).
             return isGrounded;
         }
+        
     }
 }

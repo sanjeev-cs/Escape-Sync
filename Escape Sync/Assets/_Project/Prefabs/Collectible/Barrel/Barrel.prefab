@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2591135016320542678}
   - component: {fileID: 7495575496205811891}
   - component: {fileID: 4054911123921037237}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Barrel
-  m_TagString: Ground
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,5 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c76b94828139c428db0df903abe8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectID: 
   iFramesDuration: 1
   numberOfFlashes: 3
