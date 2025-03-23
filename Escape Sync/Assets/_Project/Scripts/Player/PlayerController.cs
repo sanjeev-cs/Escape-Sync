@@ -24,7 +24,8 @@ namespace COMP305
         [SerializeField] private KeyCode leftKey; // Key for moving left
         [SerializeField] private KeyCode rightKey; // Key for moving right
         [SerializeField] private KeyCode jumpKey; // Key for jumping
-        public KeyCode interactKey; // Key for interaction (if needed)
+        [SerializeField] private KeyCode interactKey; // Key for interaction (if needed)
+        [SerializeField] private KeyCode attackKey; // Key for attacking
         
         // Interactable Game Icon
         public GameObject interactIcon;
@@ -82,21 +83,18 @@ namespace COMP305
 
             // Ignore the collision with another player
             Physics2D.IgnoreLayerCollision(6, 6, true); 
-            
-            // Check if the interact key is pressed
-            // if (Input.GetKeyDown(interactKey))
-            // {
-            //     CheckInteraction();
-            // }
 
             if (Input.GetKeyDown(interactKey))
             {
                 InteractionEventManager.OnInteractKeyPressed();
             } 
-            // else
-            // {
-            //     InteractionEventManager.OnInteractKeyReleased();
-            // }
+            
+            if (Input.GetKeyDown(attackKey))
+            {
+                InteractionEventManager.OnAttackKeyPressed();
+            } 
+
+           
 
         }
 
@@ -212,10 +210,10 @@ namespace COMP305
             interactIcon.SetActive(false);
         }
 
-        // private void CheckInteraction()
-        // {
-        //     
-        // }
-
+        public bool Attack()
+        {
+            // Determines if the player can attack (must be grounded and not moving).
+            return isGrounded;
+        }
     }
 }

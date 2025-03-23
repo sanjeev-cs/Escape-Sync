@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4220088220634853315}
   - component: {fileID: 2184277124818813725}
   - component: {fileID: 6909950390108000588}
+  - component: {fileID: 383595363695806855}
+  - component: {fileID: 502748050803866857}
   m_Layer: 6
   m_Name: Player (1)
   m_TagString: Player
@@ -126,17 +128,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.008928418, y: -0.02070409}
+  m_Offset: {x: 0.011622548, y: -0.006335169}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.24, y: 0.28}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2218039, y: 0.28685233}
+  m_Size: {x: 0.19845414, y: 0.2581144}
   m_EdgeRadius: 0
 --- !u!50 &7501632780653520776
 Rigidbody2D:
@@ -150,7 +152,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -163,7 +165,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4220088220634853315
 MonoBehaviour:
@@ -177,14 +179,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 8
-  doubleJumpForce: 5
-  runSpeed: 5
-  airControlFactor: 0.5
+  jumpForce: 4
+  doubleJumpForce: 4
+  runSpeed: 1
+  airControlFactor: 1
   leftKey: 97
   rightKey: 100
   jumpKey: 32
   interactKey: 101
+  attackKey: 102
+  interactIcon: {fileID: 0}
 --- !u!95 &2184277124818813725
 Animator:
   serializedVersion: 7
@@ -224,6 +228,39 @@ MonoBehaviour:
   numberOfFlashes: 3
   components:
   - {fileID: 4220088220634853315}
-  - {fileID: 2184277124818813725}
   deathSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
   hurtSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
+--- !u!114 &383595363695806855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561770449410483412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfaa3055cb589264587a328ee3fe2f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 1
+  playerAttackSound: {fileID: 0}
+  range: 1.5
+  damage: 1
+  colliderDistance: 0.16
+  boxCollider: {fileID: 7877410612223399519}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &502748050803866857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561770449410483412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c468e033a2b17d48bbc4560aac18fe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointSound: {fileID: 8300000, guid: 97f4fe19cf87b004c9b1c62b00813e48, type: 3}

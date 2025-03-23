@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7933656125676720726}
-  - component: {fileID: 399349711941749621}
+  - component: {fileID: 7255082933861137660}
   m_Layer: 0
   m_Name: EnemyPetrol
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 3801951900788974645}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &399349711941749621
+--- !u!114 &7255082933861137660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,8 +50,8 @@ MonoBehaviour:
   leftEdge: {fileID: 5902295683967285516}
   rightEdge: {fileID: 5111462079101069029}
   enemy: {fileID: 3801951900788974645}
-  speed: 2
-  idleDuration: 1
+  speed: 1
+  idleDuration: 2
   anim: {fileID: 4038110403865444164}
 --- !u!1 &4826260732847536833
 GameObject:
@@ -131,10 +131,6 @@ PrefabInstance:
       propertyPath: 'components.Array.data[0]'
       value: 
       objectReference: {fileID: 4347969055706673465}
-    - target: {fileID: 2701573626533280026, guid: 6d8ff394cc4214e459c795243287a8a1, type: 3}
-      propertyPath: 'components.Array.data[1]'
-      value: 
-      objectReference: {fileID: 399349711941749621}
     - target: {fileID: 3542262344960608305, guid: 6d8ff394cc4214e459c795243287a8a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.029999971
