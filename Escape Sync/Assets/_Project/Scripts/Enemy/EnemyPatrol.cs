@@ -22,8 +22,7 @@ namespace COMP305
 
         [Header("Enemy Animator")]
         [SerializeField] private Animator anim;
-
-
+        
         private void Awake()
         {
             initScale = enemy.localScale;
@@ -86,8 +85,5 @@ namespace COMP305
             // Move in that direction
             enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _directon * speed, enemy.position.y, enemy.position.z);
         }
-
-
     }
-
 }

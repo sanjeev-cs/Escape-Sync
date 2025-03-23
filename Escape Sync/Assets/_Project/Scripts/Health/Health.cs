@@ -40,9 +40,10 @@ namespace COMP305
             if (currentHealth > 0)
             {
                 // Trigger hurt animation and start invulnerability.
-                anim.SetTrigger("hurt");
+                anim.SetBool("hurt", true);
                 StartCoroutine(Invulnerability());
                 SoundManager.instance.playeSound(hurtSound);
+                anim.SetBool("hurt", false);
             }
             else if (!dead)
             {
@@ -53,8 +54,8 @@ namespace COMP305
                 }
 
                 // Trigger death animation and disable movement.
-                anim.SetTrigger("IsGrounded");
-                //anim.SetTrigger("die");
+                // anim.SetTrigger("IsGrounded");
+                anim.SetTrigger("death");
 
                 dead = true;
                 SoundManager.instance.playeSound(deathSound);
@@ -67,20 +68,20 @@ namespace COMP305
             currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
         }
 
-        //public void Respawn()
-        //{
-        //    dead = false;
-        //    AddHealth(startingHealth);
-        //    anim.ResetTrigger("die");
-        //    anim.Play("Idle");
-        //    StartCoroutine(Invulnerability());
+        public void Respawn()
+        {
+            dead = false;
+            AddHealth(startingHealth);
+            anim.ResetTrigger("death");
+            anim.Play("Idle");
+            StartCoroutine(Invulnerability());
 
-        //    // Activate all the attached component classes
-        //    foreach (Behaviour component in components)
-        //    {
-        //        component.enabled = true;
-        //    }
-        //}
+            // Activate all the attached component classes
+            foreach (Behaviour component in components)
+            {
+                component.enabled = true;
+            }
+        }
 
         private IEnumerator Invulnerability()
         {

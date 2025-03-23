@@ -8,7 +8,13 @@ namespace COMP305
         // Event for when the player collides with an interactable object
         public static event Action<string> PlayerEnteredInteractable;
         public static event Action<string> PlayerExitedInteractable;
+        
+        public static event Action<String> BarrelDestroyed;
         public static event Action InteractKeyPressed;
+        
+        public static event Action InteractKeyReleased;
+        
+        public static event Action AttackKeyPressed;
         // public static event Action InteractKeyReleased;
         
 
@@ -26,10 +32,20 @@ namespace COMP305
         {
             InteractKeyPressed?.Invoke();
         }
+        
+        public static void OnInteractKeyReleased()
+        {
+            InteractKeyReleased?.Invoke();
+        }
+        
+        public static void OnBarrelDestroyed(string objectID)
+        {
+            BarrelDestroyed?.Invoke(objectID);
+        }
 
-        // public static void OnInteractKeyReleased()
-        // {
-        //     InteractKeyReleased?.Invoke();
-        // }
+        public static void OnAttackKeyPressed()
+        {
+            AttackKeyPressed?.Invoke();
+        }
     }
 }
