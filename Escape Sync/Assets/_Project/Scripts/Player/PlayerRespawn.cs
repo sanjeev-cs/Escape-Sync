@@ -29,9 +29,6 @@ namespace COMP305
 
             transform.position = currentCheckpoint.position; // Move player to checkpoint position
             playerHealth.Respawn(); // Restore the player health and reset animation
-
-            // Move camera to checkpoint room (checkpoint objects has to be placed as a child of the room object)
-            // Camera.main.GetComponent<CameraController>().moveToNewRoom(currentCheckpoint.parent);
         }
 
         //Activate Checkpoints

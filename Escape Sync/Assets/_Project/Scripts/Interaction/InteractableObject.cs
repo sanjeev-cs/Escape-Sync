@@ -14,25 +14,25 @@ namespace COMP305
         {
             gameObject.GetComponent<BoxCollider2D>().isTrigger = true; // Ensures the collider is set as a trigger
             anim = gameObject.GetComponent<Animator>();
-            InteractionEventManager.InteractKeyPressed += InteractKeyPressed;
-            // InteractionEventManager.InteractKeyReleased += InteractKeyReleased;
+            InteractionEventManager.InteractKeyPressed += IsInteracting;
+            InteractionEventManager.InteractKeyReleased += ResetInteraction;
         }
 
         private void OnDisable()
         {
-            InteractionEventManager.InteractKeyPressed -= InteractKeyPressed;
-            // InteractionEventManager.InteractKeyReleased -= InteractKeyReleased;
+            InteractionEventManager.InteractKeyPressed -= IsInteracting;
+            InteractionEventManager.InteractKeyReleased -= ResetInteraction;
         }
 
-        private void InteractKeyPressed()
+        private void IsInteracting()
         {
             isInteracting = true;
         }
         
-        // private void InteractKeyReleased()
-        // {
-        //     isInteracting = false;
-        // }
+        private void ResetInteraction()
+        {
+            isInteracting = false;
+        }
 
         private void OnTriggerStay2D(Collider2D collision)
         {

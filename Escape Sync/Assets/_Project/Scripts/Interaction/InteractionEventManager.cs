@@ -12,6 +12,8 @@ namespace COMP305
         public static event Action<String> BarrelDestroyed;
         public static event Action InteractKeyPressed;
         
+        public static event Action InteractKeyReleased;
+        
         public static event Action AttackKeyPressed;
         // public static event Action InteractKeyReleased;
         
@@ -29,6 +31,11 @@ namespace COMP305
         public static void OnInteractKeyPressed()
         {
             InteractKeyPressed?.Invoke();
+        }
+        
+        public static void OnInteractKeyReleased()
+        {
+            InteractKeyReleased?.Invoke();
         }
         
         public static void OnBarrelDestroyed(string objectID)

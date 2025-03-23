@@ -84,11 +84,18 @@ namespace COMP305
             // Ignore the collision with another player
             Physics2D.IgnoreLayerCollision(6, 6, true); 
 
+            // Interact Key Press
             if (Input.GetKeyDown(interactKey))
             {
                 InteractionEventManager.OnInteractKeyPressed();
             } 
             
+            if (Input.GetKeyUp(interactKey))
+            {
+                InteractionEventManager.OnInteractKeyReleased();
+            }
+            
+            // Attack key press
             if (Input.GetKeyDown(attackKey))
             {
                 InteractionEventManager.OnAttackKeyPressed();

@@ -22,11 +22,13 @@ namespace COMP305
         private void OnEnable()
         {
             InteractionEventManager.InteractKeyPressed += IsInteracting;
+            InteractionEventManager.InteractKeyReleased += ResetInteraction;
         }
 
         private void OnDisable()
         {
             InteractionEventManager.InteractKeyPressed -= IsInteracting;
+            InteractionEventManager.InteractKeyReleased -= ResetInteraction;
         }
 
         private void Start()
@@ -37,6 +39,11 @@ namespace COMP305
         private void IsInteracting()
         {
             isInteracting = true;
+        }
+        
+        private void ResetInteraction()
+        {
+            isInteracting = false;
         }
 
         private void OnTriggerStay2D(Collider2D collision)
