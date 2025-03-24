@@ -73,8 +73,8 @@ namespace COMP305
                 Vector3 playerPosition = player.position;
                 float leftLimit = transform.position.x - screenBounds.x + horizontalPadding;
                 float rightLimit = transform.position.x + screenBounds.x - horizontalPadding;
-                float bottomLimit = transform.position.y - screenBounds.y - verticlePadding;
-                float topLimit = transform.position.y + screenBounds.y + verticlePadding;
+                float bottomLimit = transform.position.y - screenBounds.y +  verticlePadding;
+                float topLimit = transform.position.y + screenBounds.y - verticlePadding;
 
                 player.position = new Vector3(
                     Mathf.Clamp(playerPosition.x, leftLimit, rightLimit),
