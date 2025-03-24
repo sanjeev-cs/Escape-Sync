@@ -1967,11 +1967,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.36
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.76
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3457,6 +3457,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.56384563
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.022125587
+      objectReference: {fileID: 0}
     - target: {fileID: 6869490950028255134, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.25
@@ -4078,11 +4086,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c5c64d33e3d4e4da50f36f329569e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 367863433}
+  targets:
+  - {fileID: 367863433}
+  - {fileID: 279058548}
   Offset: {x: 0, y: 0, z: 0}
   smoothFactor: 2.5
   minValue: {x: -1, y: -0.6, z: -3}
   maxValue: {x: 0.8, y: 4.1, z: -3.05}
+  horizontalPadding: 0.2
+  verticlePadding: 0.3
 --- !u!1001 &529079335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5595,6 +5607,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.53957796
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.03425943
+      objectReference: {fileID: 0}
     - target: {fileID: 6869490950028255134, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.25
@@ -6912,7 +6932,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0076111555, y: 0.009513855}
+  m_Offset: {x: -0.002655834, y: -0.005611643}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6922,7 +6942,7 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6396663, y: 0.5930276}
+  m_Size: {x: 0.31992215, y: 0.26026616}
   m_EdgeRadius: 0
 --- !u!212 &847635095
 SpriteRenderer:
@@ -7752,7 +7772,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0076111555, y: 0.009513855}
+  m_Offset: {x: -0.00041647255, y: -0.0029039308}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7762,7 +7782,7 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6396663, y: 0.5930276}
+  m_Size: {x: 0.32926437, y: 0.25360924}
   m_EdgeRadius: 0
 --- !u!212 &953918539
 SpriteRenderer:
@@ -17828,6 +17848,14 @@ PrefabInstance:
     - target: {fileID: 2476117273074957374, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_Name
       value: Fan
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5686101
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.019743398
       objectReference: {fileID: 0}
     - target: {fileID: 6869490950028255134, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_LocalScale.x
