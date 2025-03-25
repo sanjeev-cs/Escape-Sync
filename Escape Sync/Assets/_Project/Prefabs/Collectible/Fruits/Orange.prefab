@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   hoverSound: {fileID: 8300000, guid: d4b4564ad8ca7254c9d41efb905858eb, type: 3}
+  fruitType: Orange
 --- !u!61 &5106369089850548902
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -204,5 +204,15 @@ namespace COMP305
 
         public void OpenInteractableIcon() => interactIcon.SetActive(true); // Show interaction icon
         public void CloseInteractableIcon() => interactIcon.SetActive(false); // Hide interaction icon
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Finish")) // ���������ı�ǩΪ"EndLevel"
+            {
+                //GameManager.Instance.EndGame(); // ���� GameManager �Ľ�����Ϸ����
+                                                // �������������ʾ��Ϸ����������߼�
+            }
+        }
+
     }
 }

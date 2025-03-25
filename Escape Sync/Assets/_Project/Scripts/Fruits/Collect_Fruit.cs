@@ -10,7 +10,9 @@ namespace COMP305
         public AudioClip hoverSound;
         private AudioSource audioSource;
         private bool hasPlayedSound = false;
-
+        
+        public string fruitType;
+        
         public void Start()
         {
            
@@ -24,10 +26,12 @@ namespace COMP305
             
             if (collision.CompareTag("Player") && !hasPlayedSound) 
             {
-               
+                GameManager.Instance.AddFruit(fruitType);
+
                 animator.SetTrigger("Disappear");
                 audioSource.PlayOneShot(hoverSound);
                 hasPlayedSound = true;
+                
 
              
                 // gameManager.AddScore(1);
