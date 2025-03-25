@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace COMP305
@@ -12,11 +13,16 @@ namespace COMP305
         [Header("Sounds")]
         [SerializeField] private AudioClip arrowTrapSound;
 
+        private bool isPlayerEnteredTrapZone = false;
+
         private void Attack()
         {
             cooldownTimer = 0; // Reset the cooldown timer when attacking.
 
-            SoundManager.instance.playeSound(arrowTrapSound);
+            if (isPlayerEnteredTrapZone)
+            {
+                SoundManager.instance.playeSound(arrowTrapSound);
+            }
             arrows[FindArrows()].transform.position = firePoint.position; // Move an available arrow to the fire point.
             arrows[FindArrows()].GetComponent<EnemyProjectile>().ActivateProjectile(); // Activate the arrow as a projectile.
 
@@ -40,6 +46,22 @@ namespace COMP305
             if (cooldownTimer >= attackCoolDown) // Check if enough time has passed to attack again.
             {
                 Attack(); // Call the Attack method to fire an arrow.
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                isPlayerEnteredTrapZone = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                isPlayerEnteredTrapZone = false;
             }
         }
     }

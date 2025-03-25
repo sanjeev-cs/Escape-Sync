@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6229230002295619440}
   - component: {fileID: 7877410612223399519}
   - component: {fileID: 7501632780653520776}
-  - component: {fileID: 4220088220634853315}
   - component: {fileID: 2184277124818813725}
+  - component: {fileID: 4220088220634853315}
   - component: {fileID: 6909950390108000588}
   - component: {fileID: 383595363695806855}
   - component: {fileID: 502748050803866857}
@@ -168,28 +168,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4220088220634853315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561770449410483412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 4
-  doubleJumpForce: 4
-  runSpeed: 1
-  airControlFactor: 1
-  leftKey: 97
-  rightKey: 100
-  jumpKey: 32
-  interactKey: 101
-  attackKey: 102
-  interactIcon: {fileID: 0}
 --- !u!95 &2184277124818813725
 Animator:
   serializedVersion: 7
@@ -212,6 +190,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4220088220634853315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561770449410483412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 4
+  doubleJumpForce: 4
+  runSpeed: 1
+  airControlFactor: 1
+  leftKey: 97
+  rightKey: 100
+  jumpKey: 32
+  interactKey: 101
+  attackKey: 102
+  interactIcon: {fileID: 0}
 --- !u!114 &6909950390108000588
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ namespace COMP305
         [SerializeField] private float verticalMovementRange; // How far the enemy moves vertically (up-down)
         [SerializeField] private float movementSpeed; // Speed at which the enemy moves
         [SerializeField] private float damageAmount; // Damage dealt when colliding with the player
+        private static readonly int Hurt = Animator.StringToHash("hurt");
 
         // Variables for horizontal movement (left-right)
         private bool isMovingLeft;
@@ -91,6 +92,8 @@ namespace COMP305
             if (collision.CompareTag("Player"))
             {
                 collision.GetComponent<Health>().TakeDamage(damageAmount); // Apply damage to the player's health
+                var anim = collision.GetComponent<Animator>();
+                anim.SetTrigger(Hurt);
             }
         }
     }
