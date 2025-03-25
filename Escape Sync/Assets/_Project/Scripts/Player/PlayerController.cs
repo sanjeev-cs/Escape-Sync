@@ -222,6 +222,15 @@ namespace COMP305
             // Determines if the player can attack (must be grounded and not moving).
             return isGrounded;
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Finish")) // 假设该物体的标签为"EndLevel"
+            {
+                //GameManager.Instance.EndGame(); // 调用 GameManager 的结束游戏方法
+                                                // 可以这里调用显示游戏结束界面的逻辑
+            }
+        }
+
     }
 }

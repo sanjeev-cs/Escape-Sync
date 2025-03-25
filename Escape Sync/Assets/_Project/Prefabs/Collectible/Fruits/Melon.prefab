@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   hoverSound: {fileID: 8300000, guid: e759c65f76c80834abc572593f946008, type: 3}
+  fruitType: Melon
 --- !u!82 &6646414086951209536
 AudioSource:
   m_ObjectHideFlags: 0

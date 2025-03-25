@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   hoverSound: {fileID: 8300000, guid: 397f887ca5a702240b4c9338fe65fb9c, type: 3}
+  fruitType: Banana
 --- !u!82 &883096871710728655
 AudioSource:
   m_ObjectHideFlags: 0

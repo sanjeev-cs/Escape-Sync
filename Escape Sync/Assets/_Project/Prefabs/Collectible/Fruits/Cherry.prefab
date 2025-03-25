@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3912622117132436559}
   m_Layer: 0
   m_Name: Cherry
-  m_TagString: Untagged
+  m_TagString: Cherry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   hoverSound: {fileID: 8300000, guid: 397f887ca5a702240b4c9338fe65fb9c, type: 3}
+  fruitType: Cherry
 --- !u!82 &3912622117132436559
 AudioSource:
   m_ObjectHideFlags: 0
