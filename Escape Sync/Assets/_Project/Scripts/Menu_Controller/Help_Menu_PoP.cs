@@ -27,6 +27,7 @@ namespace COMP305
             if (other.CompareTag("Player") && viewd == false)
             {
                 OpenHelpMenu();
+                
             }
         }
 
@@ -35,6 +36,7 @@ namespace COMP305
             if (viewd == false)
             {
                 helpMenu.SetActive(true);
+                viewd = true;
             } // œ‘ æ∞Ô÷˙≤Àµ•
         }
 
