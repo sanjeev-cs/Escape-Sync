@@ -41,7 +41,7 @@ namespace COMP305
         [SerializeField] private KeyCode attackKey; // Key for attacking
 
         // Interactable Icon
-        public GameObject interactIcon; // UI icon for interaction prompt
+        // public GameObject interactIcon; // UI icon for interaction prompt
 
         private void Start()
         {
@@ -119,7 +119,7 @@ namespace COMP305
         {
             if (Input.GetKeyDown(jumpKey)) // Check if jump key is pressed
             {
-                if (isGrounded || isFalling)
+                if (isGrounded)
                 {
                     Jump(jumpForce); // Perform normal jump
                     canDoubleJump = true; // Allow double jump
@@ -138,16 +138,16 @@ namespace COMP305
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, force); // Apply jump force
             isGrounded = false; // Set grounded state to false
             isJumping = true; // Set jumping state to true
-            isFalling = true;
+            isFalling = false;
         }
 
         private void HandleAnimations()
         {
             // Update animator parameters based on movement state
-            animator.SetBool(IsRunning, Mathf.Abs(rb.linearVelocity.x) > 0.1f && isGrounded);
+            animator.SetBool(IsRunning, Mathf.Abs(rb.linearVelocity.x) > 0f && isGrounded);
             animator.SetBool(IsIdle, rb.linearVelocity.x == 0 && isGrounded);
             animator.SetBool(IsJumping, isJumping); 
-            animator.SetBool(IsFalling, isFalling);
+            animator.SetBool(IsFalling, isFalling); 
         }
 
         private void HandleInteraction()
@@ -202,15 +202,13 @@ namespace COMP305
             Physics2D.IgnoreLayerCollision(6, 6, true); 
         }
 
-        public void OpenInteractableIcon() => interactIcon.SetActive(true); // Show interaction icon
-        public void CloseInteractableIcon() => interactIcon.SetActive(false); // Hide interaction icon
+        // public void OpenInteractableIcon() => interactIcon.SetActive(true); // Show interaction icon
+        // public void CloseInteractableIcon() => interactIcon.SetActive(false); // Hide interaction icon
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Finish")) // ���������ı�ǩΪ"EndLevel"
+            if (collision.CompareTag("Finish"))
             {
-                //GameManager.Instance.EndGame(); // ���� GameManager �Ľ�����Ϸ����
-                                                // �������������ʾ��Ϸ����������߼�
             }
         }
 

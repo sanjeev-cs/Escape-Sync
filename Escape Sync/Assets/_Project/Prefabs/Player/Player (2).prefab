@@ -100,10 +100,10 @@ GameObject:
   - component: {fileID: 1545266762791426215}
   - component: {fileID: 3403064535554198450}
   - component: {fileID: 1999726242535362877}
+  - component: {fileID: 610876426716395370}
   - component: {fileID: 2798894189441233397}
   - component: {fileID: 4085748447103608456}
   - component: {fileID: 8008051303684228029}
-  - component: {fileID: 610876426716395370}
   m_Layer: 6
   m_Name: Player (2)
   m_TagString: Player
@@ -277,6 +277,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &610876426716395370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282655447657825456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 4
+  doubleJumpForce: 3
+  runSpeed: 1
+  airControlFactor: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  extraHeight: 0.1
+  leftKey: 276
+  rightKey: 275
+  jumpKey: 256
+  interactKey: 303
+  attackKey: 0
 --- !u!114 &2798894189441233397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,32 +355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointSound: {fileID: 8300000, guid: 97f4fe19cf87b004c9b1c62b00813e48, type: 3}
---- !u!114 &610876426716395370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5282655447657825456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 4
-  doubleJumpForce: 3
-  runSpeed: 1
-  airControlFactor: 0.5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  extraHeight: 0.1
-  leftKey: 276
-  rightKey: 275
-  jumpKey: 256
-  interactKey: 303
-  attackKey: 0
-  interactIcon: {fileID: 0}
 --- !u!1 &5789224168228510353
 GameObject:
   m_ObjectHideFlags: 0

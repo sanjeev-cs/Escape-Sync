@@ -71,7 +71,7 @@ namespace COMP305
         public void Respawn()
         {
             dead = false;
-            AddHealth(startingHealth);
+            AddHealth(2);
             anim.ResetTrigger("death");
             anim.Play("Idle");
             StartCoroutine(Invulnerability());
