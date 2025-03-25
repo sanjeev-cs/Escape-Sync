@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -21,11 +22,16 @@ namespace COMP305
         [SerializeField] private float doubleJumpForce = 4f; // Force applied for double jump
         [SerializeField] private float runSpeed = 5f; // Movement speed of the player
         [SerializeField] private float airControlFactor = 0.5f; // Control factor when in the air
+        
+        [Header("Ground Detection")]
+        [SerializeField] private LayerMask groundLayer; // Ground Layer
+        [SerializeField] private float extraHeight = 0.1f; // Small buffer for ground detection
 
         // Conditional Checks
-        private bool isGrounded; // Checks if player is on the ground
         private bool canDoubleJump; // Determines if the player can double jump
+        private bool isGrounded; // Determines if the player is on ground
         private bool isJumping; // Tracks if the player is currently jumping
+        private bool isFalling; // Tracks if the player is currently falling
 
         [Header("Player Controls")]
         [SerializeField] private KeyCode leftKey; // Key for moving left
@@ -42,17 +48,51 @@ namespace COMP305
             // Initializing component references
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
-            // boxCollider = GetComponent<BoxCollider2D>();
+            boxCollider = GetComponent<BoxCollider2D>();
         }
 
         private void Update()
         {
+            IsOnGround(); // Check the player is on ground or not
             HandleMovement(); // Handles player movement input
             HandleJump(); // Handles jump and double jump
             HandleAnimations(); // Updates animation states
             HandleInteraction(); // Handles interaction logic
             IgnoreCollision(); // Handles the collision with another player
+            
+            // Check if the player is falling
+            if (!isGrounded && rb.linearVelocity.y < -0.1f)
+            {
+                isFalling = true;
+            }
         }
+
+        private void IsOnGround()
+        {
+            RaycastHit2D hit = Physics2D.BoxCast(
+                boxCollider.bounds.center, 
+                boxCollider.bounds.size, 
+                0, 
+                Vector2.down, 
+                extraHeight,
+                groundLayer
+            );
+
+            isGrounded = hit.collider != null;
+    
+            if (isGrounded)
+            {
+                isJumping = false;
+                isFalling = false;
+                canDoubleJump = false;
+            }
+            else if (rb.linearVelocityY < 0) // Check if the player is moving downward
+            {
+                isJumping = false; // Player is no longer jumping
+                isFalling = true;
+            }
+        }
+
 
         private void HandleMovement()
         {
@@ -79,7 +119,7 @@ namespace COMP305
         {
             if (Input.GetKeyDown(jumpKey)) // Check if jump key is pressed
             {
-                if (isGrounded)
+                if (isGrounded || isFalling)
                 {
                     Jump(jumpForce); // Perform normal jump
                     canDoubleJump = true; // Allow double jump
@@ -87,17 +127,18 @@ namespace COMP305
                 else if (canDoubleJump)
                 {
                     Jump(doubleJumpForce); // Perform double jump
-                    isJumping = false;
-                    // canDoubleJump = false; // Disable further double jumps
+                    canDoubleJump = false; // Disable further double jumps
                 }
             }
         }
+
 
         private void Jump(float force)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, force); // Apply jump force
             isGrounded = false; // Set grounded state to false
             isJumping = true; // Set jumping state to true
+            isFalling = true;
         }
 
         private void HandleAnimations()
@@ -105,9 +146,8 @@ namespace COMP305
             // Update animator parameters based on movement state
             animator.SetBool(IsRunning, Mathf.Abs(rb.linearVelocity.x) > 0.1f && isGrounded);
             animator.SetBool(IsIdle, rb.linearVelocity.x == 0 && isGrounded);
-            animator.SetBool(IsJumping, isJumping);
-            animator.SetBool(IsFalling, rb.linearVelocity.y < -0.1f && !isGrounded);
-            // if(canDoubleJump) animator.SetTrigger(DoubleJump);
+            animator.SetBool(IsJumping, isJumping); 
+            animator.SetBool(IsFalling, isFalling);
         }
 
         private void HandleInteraction()
@@ -118,18 +158,28 @@ namespace COMP305
             if (Input.GetKeyDown(attackKey)) InteractionEventManager.OnAttackKeyPressed();
         }
 
+        
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            // Check if the player has landed on the ground or a moving platform
-            if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MovingPlatform"))
+            // If it's a moving platform, attach player to it
+            if (collision.gameObject.CompareTag("MovingPlatform"))
             {
                 isGrounded = true;
-                isJumping = false;
-                canDoubleJump = false;
-
-                // If it's a moving platform, attach player to it
-                if (collision.gameObject.CompareTag("MovingPlatform"))
-                    StartCoroutine(SetParentWithDelay(collision.transform));
+                isFalling = true;
+                transform.parent = collision.transform;
+                // StartCoroutine(SetParentWithDelay(collision.transform));
+                
+            }
+        }
+        
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            // Check if player left the ground or a moving platform
+            if (collision.gameObject.CompareTag("MovingPlatform"))
+            {
+                isGrounded = false;
+                transform.parent = null;
+                // StartCoroutine(RemoveParentWithDelay());
             }
         }
 
@@ -138,22 +188,13 @@ namespace COMP305
             yield return new WaitForEndOfFrame();
             transform.parent = newParent; // Set moving platform as the parent to move with it
         }
-
+        
         private IEnumerator RemoveParentWithDelay()
         {
             yield return new WaitForEndOfFrame();
             transform.parent = null; // Detach from moving platform
         }
-
-        private void OnCollisionExit2D(Collision2D collision)
-        {
-            // Check if player left the ground or a moving platform
-            if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MovingPlatform"))
-            {
-                isGrounded = false;
-                StartCoroutine(RemoveParentWithDelay());
-            }
-        }
+        
 
         private void IgnoreCollision()
         {

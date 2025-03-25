@@ -99,11 +99,11 @@ GameObject:
   - component: {fileID: 683191411017626540}
   - component: {fileID: 1545266762791426215}
   - component: {fileID: 3403064535554198450}
-  - component: {fileID: 3388097122924295814}
   - component: {fileID: 1999726242535362877}
   - component: {fileID: 2798894189441233397}
   - component: {fileID: 4085748447103608456}
   - component: {fileID: 8008051303684228029}
+  - component: {fileID: 610876426716395370}
   m_Layer: 6
   m_Name: Player (2)
   m_TagString: Player
@@ -255,28 +255,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3388097122924295814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5282655447657825456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 3
-  doubleJumpForce: 2
-  runSpeed: 2
-  airControlFactor: 0.5
-  leftKey: 276
-  rightKey: 275
-  jumpKey: 256
-  interactKey: 303
-  attackKey: 0
-  interactIcon: {fileID: 0}
 --- !u!95 &1999726242535362877
 Animator:
   serializedVersion: 7
@@ -287,7 +265,7 @@ Animator:
   m_GameObject: {fileID: 5282655447657825456}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 438c85c45226ba342b4688281e7de587, type: 2}
+  m_Controller: {fileID: 9100000, guid: d85b8d4b3a66c2049a204dc13a99090f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -315,7 +293,7 @@ MonoBehaviour:
   iFramesDuration: 2
   numberOfFlashes: 3
   components:
-  - {fileID: 3388097122924295814}
+  - {fileID: 0}
   deathSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
   hurtSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
 --- !u!114 &4085748447103608456
@@ -352,6 +330,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointSound: {fileID: 8300000, guid: 97f4fe19cf87b004c9b1c62b00813e48, type: 3}
+--- !u!114 &610876426716395370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282655447657825456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 4
+  doubleJumpForce: 3
+  runSpeed: 1
+  airControlFactor: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  extraHeight: 0.1
+  leftKey: 276
+  rightKey: 275
+  jumpKey: 256
+  interactKey: 303
+  attackKey: 0
+  interactIcon: {fileID: 0}
 --- !u!1 &5789224168228510353
 GameObject:
   m_ObjectHideFlags: 0
