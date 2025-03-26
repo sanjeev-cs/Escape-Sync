@@ -26,6 +26,10 @@ namespace COMP305
         [Header("Ground Detection")]
         [SerializeField] private LayerMask groundLayer; // Ground Layer
         [SerializeField] private float extraHeight = 0.1f; // Small buffer for ground detection
+        
+        // [Header("Coyote Time Settings")]
+        // [SerializeField] private float coyoteTime = 0.2f; // Time allowance for jumping after falling
+        // private float fallTimeCounter; // Track the time after leaving the platform
 
         // Conditional Checks
         private bool canDoubleJump; // Determines if the player can double jump

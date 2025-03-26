@@ -71,8 +71,9 @@ namespace COMP305
         public void Respawn()
         {
             dead = false;
-            AddHealth(2);
-            anim.ResetTrigger("death");
+            AddHealth(startingHealth);
+            // anim.ResetTrigger("death");
+            ResetAnimatorParameters();
             anim.Play("Idle");
             StartCoroutine(Invulnerability());
 
@@ -102,6 +103,16 @@ namespace COMP305
         private void Deactivate()
         {
             gameObject.SetActive(false);
+        }
+        
+        private void ResetAnimatorParameters()
+        {
+            anim.ResetTrigger("hurt");
+            anim.ResetTrigger("death");
+            anim.SetBool("IsRunning", false);
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsJumping", false);
+            anim.SetBool("IsFalling", false);
         }
     }
 }

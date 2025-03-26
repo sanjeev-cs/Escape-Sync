@@ -8,7 +8,7 @@ namespace COMP305
         private AudioClip checkpointSound;
 
         private Health playerHealth;
-
+        
         private void Awake()
         {
             playerHealth = GetComponent<Health>();
@@ -20,6 +20,7 @@ namespace COMP305
             if (checkpoint == null)
             {
                 Debug.Log("No checkpoint set. Respawn failed.");
+                UiManager.Instance.GameOver(); // Access through the static Instance
                 return;
             }
 

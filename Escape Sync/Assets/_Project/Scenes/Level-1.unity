@@ -1207,6 +1207,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.38874072
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.10967806
+      objectReference: {fileID: 0}
     - target: {fileID: 6869490950028255134, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.804
@@ -2870,7 +2878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: startingHealth
-      value: 3
+      value: 999999
       objectReference: {fileID: 0}
     - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: iFramesDuration
@@ -2887,7 +2895,7 @@ PrefabInstance:
     - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: 'components.Array.data[1]'
       value: 
-      objectReference: {fileID: 1449091184}
+      objectReference: {fileID: 271940471}
     - target: {fileID: 7501632780653520776, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -3794,11 +3802,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_Size.y
-      value: 0.535057
+      value: 0.8935697
       objectReference: {fileID: 0}
     - target: {fileID: 4542010632153867191, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_Offset.y
-      value: -0.036519907
+      value: 0.14273643
       objectReference: {fileID: 0}
     - target: {fileID: 6869490950028255134, guid: 7c113d801a7a0794eb01326b381b18a2, type: 3}
       propertyPath: m_LocalScale.x
@@ -14351,7 +14359,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
     - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: startingHealth
-      value: 3
+      value: 999999
       objectReference: {fileID: 0}
     - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: iFramesDuration
@@ -14533,11 +14541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3e9caa75d498342b57fceaa9686419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1449091184 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2184277124818813725, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
-  m_PrefabInstance: {fileID: 271940470}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1460698891
 GameObject:
   m_ObjectHideFlags: 0
@@ -17307,7 +17310,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0018594265, y: 0}
+  m_Offset: {x: 0.0018594265, y: 0.004145384}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -17317,7 +17320,7 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7.7372184, y: 0.46}
+  m_Size: {x: 7.7372184, y: 0.4682908}
   m_EdgeRadius: 0
 --- !u!1001 &1739563881
 PrefabInstance:
@@ -19245,13 +19248,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1938412043}
+  - component: {fileID: 1938412044}
   m_Layer: 0
   m_Name: Menus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1938412043
 Transform:
   m_ObjectHideFlags: 0
@@ -19271,6 +19275,20 @@ Transform:
   - {fileID: 254239651}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1938412044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938412042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9bcea1f6164694bb10980d2cf90dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 500249554}
+  gameOverSound: {fileID: 8300000, guid: 9f212fb6ba5ab11438cbc8ceba2751bb, type: 3}
 --- !u!1 &1948296282
 GameObject:
   m_ObjectHideFlags: 0
