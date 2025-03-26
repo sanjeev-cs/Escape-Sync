@@ -40,7 +40,7 @@ namespace COMP305
             if (currentHealth > 0)
             {
                 // Trigger hurt animation and start invulnerability.
-                anim.ResetTrigger("hurt");
+                // anim.ResetTrigger("hurt");
                 anim.SetTrigger("hurt");
                 StartCoroutine(Invulnerability());
                 SoundManager.instance.playeSound(hurtSound);
@@ -71,8 +71,9 @@ namespace COMP305
         public void Respawn()
         {
             dead = false;
-            AddHealth(2);
-            anim.ResetTrigger("death");
+            AddHealth(startingHealth);
+            // anim.ResetTrigger("death");
+            ResetAnimatorParameters();
             anim.Play("Idle");
             StartCoroutine(Invulnerability());
 
@@ -102,6 +103,18 @@ namespace COMP305
         private void Deactivate()
         {
             gameObject.SetActive(false);
+        }
+        
+        private void ResetAnimatorParameters()
+        {
+            anim.SetBool("IsIdle", false);
+            anim.SetBool("IsRunning", false);
+            anim.SetBool("IsJumping", false);
+            anim.SetBool("IsFalling", false);
+            anim.SetBool("IsGrounded", false);
+            anim.ResetTrigger("hurt");
+            anim.ResetTrigger("death");
+            
         }
     }
 }

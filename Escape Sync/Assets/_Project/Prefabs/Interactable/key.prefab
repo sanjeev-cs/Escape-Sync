@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 4885542768331597912}
   - component: {fileID: 8821849542264963228}
   - component: {fileID: 15487429945314570}
-  - component: {fileID: 6786779173550584138}
+  - component: {fileID: 8681199635684984030}
   m_Layer: 0
   m_Name: key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4885542768331597912
 Transform:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.15936899, y: 0.17754602}
   m_EdgeRadius: 0
---- !u!114 &6786779173550584138
+--- !u!114 &8681199635684984030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7140464432606431458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5550cc6d5aa7a1f45a9d97695e296cf6, type: 3}
+  m_Script: {fileID: 11500000, guid: e0b2833bfbbec4c4c8dfced19ee2e2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectID: 3
+  objectID: barrier3
+  iFramesDuration: 1
+  numberOfFlashes: 5

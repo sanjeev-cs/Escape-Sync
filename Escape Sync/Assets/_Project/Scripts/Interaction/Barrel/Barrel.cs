@@ -21,14 +21,14 @@ namespace COMP305
 
         private void OnEnable()
         {
-            InteractionEventManager.InteractKeyPressed += IsInteracting;
-            InteractionEventManager.InteractKeyReleased += ResetInteraction;
+            InteractionEventManager.InteractKeyPressed += StartInteraction;
+            InteractionEventManager.InteractKeyReleased += StopInteraction;
         }
 
         private void OnDisable()
         {
-            InteractionEventManager.InteractKeyPressed -= IsInteracting;
-            InteractionEventManager.InteractKeyReleased -= ResetInteraction;
+            InteractionEventManager.InteractKeyPressed -= StartInteraction;
+            InteractionEventManager.InteractKeyReleased -= StopInteraction;
         }
 
         private void Start()
@@ -36,12 +36,12 @@ namespace COMP305
             boxCollider = gameObject.GetComponent<BoxCollider2D>();
         }
 
-        private void IsInteracting()
+        private void StartInteraction(GameObject player)
         {
             isInteracting = true;
         }
         
-        private void ResetInteraction()
+        private void StopInteraction(GameObject player)
         {
             isInteracting = false;
         }

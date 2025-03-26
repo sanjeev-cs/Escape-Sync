@@ -26,6 +26,15 @@ namespace COMP305
         [Header("Ground Detection")]
         [SerializeField] private LayerMask groundLayer; // Ground Layer
         [SerializeField] private float extraHeight = 0.1f; // Small buffer for ground detection
+        
+        [Header("Coyote Time Parameters")]
+        [SerializeField] private float coyoteTime = 0.2f; // Time allowance for jumping after falling
+        private float fallTimeCounter; // Track the time after leaving the platform
+
+        [Header("Wall Jump Parameters")] 
+        [SerializeField] private LayerMask wallLayer;
+        [SerializeField] private float wallJumpForce;
+        private float wallJumpCooldown;
 
         // Conditional Checks
         private bool canDoubleJump; // Determines if the player can double jump
@@ -59,11 +68,10 @@ namespace COMP305
             HandleAnimations(); // Updates animation states
             HandleInteraction(); // Handles interaction logic
             IgnoreCollision(); // Handles the collision with another player
-            
-            // Check if the player is falling
-            if (!isGrounded && rb.linearVelocity.y < -0.1f)
+
+            if (wallJumpCooldown > 0)
             {
-                isFalling = true;
+                wallJumpCooldown -= Time.deltaTime;
             }
         }
 
@@ -78,6 +86,7 @@ namespace COMP305
                 groundLayer
             );
 
+            bool wasGrounded = isGrounded; // Track previous grounded state
             isGrounded = hit.collider != null;
     
             if (isGrounded)
@@ -85,12 +94,40 @@ namespace COMP305
                 isJumping = false;
                 isFalling = false;
                 canDoubleJump = false;
+                fallTimeCounter = coyoteTime; // Reset coyote time on ground
             }
-            else if (rb.linearVelocityY < 0) // Check if the player is moving downward
+            else 
             {
-                isJumping = false; // Player is no longer jumping
-                isFalling = true;
+                // If just left the ground
+                if (wasGrounded)
+                {
+                    fallTimeCounter = coyoteTime; // Start the coyote time countdown;
+                }
+                else
+                {
+                    fallTimeCounter -= Time.deltaTime; // Decrease the timer
+                }
+                
+                if (rb.linearVelocity.y < 0) // Check if falling
+                {
+                    isJumping = false;
+                    isFalling = true;
+                }
             }
+        }
+
+        private bool IsOnWall()
+        {
+            RaycastHit2D hit = Physics2D.BoxCast(
+                boxCollider.bounds.center,
+                boxCollider.bounds.size,
+                0,
+                new Vector2(transform.localScale.x, 0),
+                0.1f,
+                wallLayer
+            );
+                
+            return hit.collider != null;
         }
 
 
@@ -119,15 +156,19 @@ namespace COMP305
         {
             if (Input.GetKeyDown(jumpKey)) // Check if jump key is pressed
             {
-                if (isGrounded)
+                if (isGrounded || fallTimeCounter > 0) // Allow jump during coyote time
                 {
                     Jump(jumpForce); // Perform normal jump
                     canDoubleJump = true; // Allow double jump
                 }
-                else if (canDoubleJump)
+                else if (canDoubleJump && isJumping)
                 {
                     Jump(doubleJumpForce); // Perform double jump
                     canDoubleJump = false; // Disable further double jumps
+                }
+                else if (IsOnWall() && wallJumpCooldown <=0)
+                {
+                    WallJump();
                 }
             }
         }
@@ -138,6 +179,16 @@ namespace COMP305
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, force); // Apply jump force
             isGrounded = false; // Set grounded state to false
             isJumping = true; // Set jumping state to true
+            isFalling = false;
+        }
+
+        private void WallJump()
+        {
+            float wallDirection = transform.localScale.x > 0? -1 : 1;
+            rb.linearVelocity = new Vector2(wallDirection * wallJumpForce, jumpForce);
+            wallJumpCooldown = 0.2f;
+            canDoubleJump = true;
+            isJumping = true;
             isFalling = false;
         }
 
@@ -153,8 +204,8 @@ namespace COMP305
         private void HandleInteraction()
         {
             // Trigger interaction events when pressing respective keys
-            if (Input.GetKeyDown(interactKey)) InteractionEventManager.OnInteractKeyPressed();
-            if (Input.GetKeyUp(interactKey)) InteractionEventManager.OnInteractKeyReleased();
+            if (Input.GetKeyDown(interactKey)) InteractionEventManager.OnInteractKeyPressed(gameObject);
+            if (Input.GetKeyUp(interactKey)) InteractionEventManager.OnInteractKeyReleased(gameObject);
             if (Input.GetKeyDown(attackKey)) InteractionEventManager.OnAttackKeyPressed();
         }
 
