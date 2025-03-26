@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1717224572173649623}
   - component: {fileID: 3010070829875579920}
   - component: {fileID: 6095739970649727739}
-  - component: {fileID: 2439235804712080241}
+  - component: {fileID: 2551834709289954420}
   m_Layer: 10
   m_Name: MetalHead
   m_TagString: Enemy
@@ -121,7 +121,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   components: []
   deathSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
   hurtSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
---- !u!114 &2439235804712080241
+--- !u!114 &2551834709289954420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,11 +186,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7168090105224339242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422597a0442728e4c8693d0684ee7245, type: 3}
+  m_Script: {fileID: 11500000, guid: 60a55bfbdeb38c04ab8f6b9886a24d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftEdge: {fileID: 0}
-  rightEdge: {fileID: 0}
-  enemy: {fileID: 0}
-  speed: 0
-  idleDuration: 0
+  damage: 1

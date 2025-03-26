@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace COMP305
 {
-    public class MetalHeadDamage : MonoBehaviour
+    public class SolidTrapDamage : MonoBehaviour
     {
         [SerializeField] protected float damage; // Amount of damage the enemy will give to the player
         private static readonly int Hurt = Animator.StringToHash("hurt");
