@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -0.0019312203
       objectReference: {fileID: 0}
+    - target: {fileID: 1717224572173649623, guid: 56edf1b605314dc44969c9ea18331aba, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2375447909598788889, guid: 56edf1b605314dc44969c9ea18331aba, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -190,7 +194,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MetalHead
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2439235804712080241, guid: 56edf1b605314dc44969c9ea18331aba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

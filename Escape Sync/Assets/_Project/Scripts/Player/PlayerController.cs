@@ -204,8 +204,8 @@ namespace COMP305
         private void HandleInteraction()
         {
             // Trigger interaction events when pressing respective keys
-            if (Input.GetKeyDown(interactKey)) InteractionEventManager.OnInteractKeyPressed();
-            if (Input.GetKeyUp(interactKey)) InteractionEventManager.OnInteractKeyReleased();
+            if (Input.GetKeyDown(interactKey)) InteractionEventManager.OnInteractKeyPressed(gameObject);
+            if (Input.GetKeyUp(interactKey)) InteractionEventManager.OnInteractKeyReleased(gameObject);
             if (Input.GetKeyDown(attackKey)) InteractionEventManager.OnAttackKeyPressed();
         }
 

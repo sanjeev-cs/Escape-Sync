@@ -1,48 +1,57 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace COMP305
 {
-    [RequireComponent(typeof(BoxCollider2D))]
     public class InteractableObject : MonoBehaviour, IInteractable
     {
         [SerializeField] private string objectID; // Unique identifier for this object
-        private PlayerController playerController;
-        private bool isInteracting = false;
         private Animator anim;
+        private List<GameObject> interactingPlayers = new List<GameObject>(); // Track interacting players
+        private List<GameObject> playersInCollider = new List<GameObject>(); // Track all players in collider
+
         private void OnEnable()
         {
-            gameObject.GetComponent<BoxCollider2D>().isTrigger = true; // Ensures the collider is set as a trigger
+            gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             anim = gameObject.GetComponent<Animator>();
-            InteractionEventManager.InteractKeyPressed += IsInteracting;
-            InteractionEventManager.InteractKeyReleased += ResetInteraction;
+            InteractionEventManager.InteractKeyPressed += StartInteraction;
+            InteractionEventManager.InteractKeyReleased += StopInteraction;
         }
 
         private void OnDisable()
         {
-            InteractionEventManager.InteractKeyPressed -= IsInteracting;
-            InteractionEventManager.InteractKeyReleased -= ResetInteraction;
+            InteractionEventManager.InteractKeyPressed -= StartInteraction;
+            InteractionEventManager.InteractKeyReleased -= StopInteraction;
         }
 
-        private void IsInteracting()
+        private void StartInteraction(GameObject player)
         {
-            isInteracting = true;
-        }
-        
-        private void ResetInteraction()
-        {
-            isInteracting = false;
-        }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (collision.CompareTag("Player"))
+            if (playersInCollider.Contains(player))
             {
-                if (isInteracting)
+                interactingPlayers.Add(player);
+                Interact();
+                anim.SetBool("Interact", true);
+            }
+        }
+
+        private void StopInteraction(GameObject player)
+        {
+            if (interactingPlayers.Contains(player))
+            {
+                interactingPlayers.Remove(player);
+                if (interactingPlayers.Count == 0) // Stop only if no other players are interacting
                 {
-                    Interact();
-                    anim.SetBool("Interact", true);
+                    StopInteract();
+                    anim.SetBool("Interact", false);
                 }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!playersInCollider.Contains(collision.gameObject))
+            {
+                playersInCollider.Add(collision.gameObject);
             }
         }
 
@@ -50,9 +59,8 @@ namespace COMP305
         {
             if (collision.CompareTag("Player"))
             {
-                StopInteract();
-                isInteracting = false;
-                anim.SetBool("Interact", false);
+                playersInCollider.Remove(collision.gameObject);
+                StopInteraction(collision.gameObject); // This will handle the interaction stopping logic
             }
         }
 

@@ -9,39 +9,35 @@ namespace COMP305
         private bool isInteracting = false;
         private SpriteRenderer spriteRenderer;
         [SerializeField] private string objectID;
-        [SerializeField] private float iFramesDuration; // Duration to disappear.
-        [SerializeField] private float numberOfFlashes; // Number of flashes during invulnerability.
+        [SerializeField] private float iFramesDuration = 1f; // Duration to disappear.
+        [SerializeField] private int numberOfFlashes = 5; // Number of flashes during disappearance.
 
         private Coroutine disappearCoroutine; // To track the running coroutine.
 
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            boxCollider = GetComponent<BoxCollider2D>();
         }
 
         private void OnEnable()
         {
-            InteractionEventManager.InteractKeyPressed += IsInteracting;
-            InteractionEventManager.InteractKeyReleased += ResetInteraction;
+            InteractionEventManager.InteractKeyPressed += StartInteraction;
+            InteractionEventManager.InteractKeyReleased += StopInteraction;
         }
 
         private void OnDisable()
         {
-            InteractionEventManager.InteractKeyPressed -= IsInteracting;
-            InteractionEventManager.InteractKeyReleased -= ResetInteraction;
+            InteractionEventManager.InteractKeyPressed -= StartInteraction;
+            InteractionEventManager.InteractKeyReleased -= StopInteraction;
         }
 
-        private void Start()
-        {
-            boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        }
-
-        private void IsInteracting()
+        private void StartInteraction(GameObject player)
         {
             isInteracting = true;
         }
         
-        private void ResetInteraction()
+        private void StopInteraction(GameObject player)
         {
             isInteracting = false;
         }
@@ -50,7 +46,6 @@ namespace COMP305
         {
             if (collision.CompareTag("Player") && isInteracting)
             {
-                // If coroutine is not already running, start the disappear sequence
                 if (disappearCoroutine == null)
                 {
                     disappearCoroutine = StartCoroutine(Disappear());
@@ -60,7 +55,7 @@ namespace COMP305
 
         private IEnumerator Disappear()
         {
-            // Flashing effect
+            // Flashing effect before disappearance
             for (int i = 0; i < numberOfFlashes; i++)
             {
                 spriteRenderer.color = new Color(1, 0, 0, 0.5f); // Red with transparency
@@ -69,16 +64,15 @@ namespace COMP305
                 yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
             }
 
-            // After flashing, deactivate the object
+            // Deactivate the object and notify interaction complete
             Deactivate();
             InteractionEventManager.NotifyPlayerEntered(objectID);
         }
 
         private void Deactivate()
         {
-            // Deactivate the barrel after flashing
             gameObject.SetActive(false);
-            disappearCoroutine = null; // Reset the coroutine tracker
+            disappearCoroutine = null; // Reset coroutine tracker
         }
     }
 }

@@ -9,10 +9,11 @@ namespace COMP305
         public static event Action<string> PlayerEnteredInteractable;
         public static event Action<string> PlayerExitedInteractable;
         
-        public static event Action<String> BarrelDestroyed;
-        public static event Action InteractKeyPressed;
+        public static event Action<string> BarrelDestroyed;
         
-        public static event Action InteractKeyReleased;
+        public static event Action<GameObject> InteractKeyPressed;
+        
+        public static event Action<GameObject> InteractKeyReleased;
         
         public static event Action AttackKeyPressed;
         // public static event Action InteractKeyReleased;
@@ -28,14 +29,14 @@ namespace COMP305
             PlayerExitedInteractable?.Invoke(objectID);
         }
 
-        public static void OnInteractKeyPressed()
+        public static void OnInteractKeyPressed(GameObject player)
         {
-            InteractKeyPressed?.Invoke();
+            InteractKeyPressed?.Invoke(player);
         }
         
-        public static void OnInteractKeyReleased()
+        public static void OnInteractKeyReleased(GameObject player)
         {
-            InteractKeyReleased?.Invoke();
+            InteractKeyReleased?.Invoke(player);
         }
         
         public static void OnBarrelDestroyed(string objectID)
