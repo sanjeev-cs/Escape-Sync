@@ -31,6 +31,8 @@ namespace COMP305
         {
             if (targets.Count < 2) return; // Ensure that we have two players before proceeding
             Follow(); // Call the function to move the camera
+            Debug.Log(targets[0].transform.position.x);
+            Debug.Log(targets[1].transform.position.x);
         }
         
         // Moves the camera smoothly to follow both players while keeping them in view.
@@ -38,6 +40,12 @@ namespace COMP305
         {
             Vector3 centerPoint = GetCenterPoint(); // Get the midpoint between the two players
             Vector3 targetPosition = centerPoint + offset; // Apply the offset to position the camera
+            float x = targets[0].transform.position.x;
+            float x1 = targets[1].transform.position.x;
+            float y = targets[0].transform.position.y;
+            float y1 = targets[1].transform.position.y;
+            float xAvg = (x + x1) / 2;
+            float yAvg = (y + y1) / 2;
 
             // Clamp the camera position within the defined bounds
             Vector3 boundPosition = new Vector3(
@@ -45,10 +53,11 @@ namespace COMP305
                 Mathf.Clamp(targetPosition.y, minValue.y, maxValue.y),
                 Mathf.Clamp(targetPosition.z, minValue.z, maxValue.z)
             );
-
+            transform.position = new Vector3(xAvg, yAvg, transform.position.z);
             // Smoothly move the camera towards the target position
             Vector3 smoothPosition = Vector3.Lerp(transform.position, boundPosition, smoothFactor * Time.deltaTime);
             transform.position = smoothPosition;
+
 
             // Prevent players from moving outside the camera view
             RestrictPlayerMovement();
