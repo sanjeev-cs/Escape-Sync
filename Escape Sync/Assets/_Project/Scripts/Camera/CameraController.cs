@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace COMP305
 {
@@ -57,6 +58,11 @@ namespace COMP305
             // Smoothly move the camera towards the target position
             Vector3 smoothPosition = Vector3.Lerp(transform.position, boundPosition, smoothFactor * Time.deltaTime);
             transform.position = smoothPosition;
+            transform.position = new Vector3(Mathf.Max(transform.position.x, -1.02f), transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.Min(transform.position.x, 0.8f), transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x,Mathf.Min(transform.position.y, 4.12f),  transform.position.z);
+            //transform.position = new Vector3(transform.position.x, Mathf.Min(transform.position.y, 4.12f), transform.position.z);
+            transform.position = new Vector3(transform.position.x, Mathf.Max(transform.position.y, -0.59f), transform.position.z);
 
 
             // Prevent players from moving outside the camera view
