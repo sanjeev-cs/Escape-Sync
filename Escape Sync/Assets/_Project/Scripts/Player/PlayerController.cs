@@ -62,6 +62,8 @@ namespace COMP305
 
         private void Update()
         {
+            if (GetComponent<Health>().currentHealth <= 0) return; // Stop all movement if dead
+            
             IsOnGround(); // Check the player is on ground or not
             HandleMovement(); // Handles player movement input
             HandleJump(); // Handles jump and double jump

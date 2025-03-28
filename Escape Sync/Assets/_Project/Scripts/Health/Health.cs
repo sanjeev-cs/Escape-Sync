@@ -40,7 +40,6 @@ namespace COMP305
             if (currentHealth > 0)
             {
                 // Trigger hurt animation and start invulnerability.
-                // anim.ResetTrigger("hurt");
                 anim.SetTrigger("hurt");
                 StartCoroutine(Invulnerability());
                 SoundManager.instance.playeSound(hurtSound);
@@ -53,11 +52,14 @@ namespace COMP305
                 {
                     component.enabled = false;
                 }
+                
+                // Reset all animator parameters
+                ResetAnimatorParameters();
 
-                // Trigger death animation and disable movement.
-                // anim.SetTrigger("IsGrounded");
-                anim.ResetTrigger("hurt"); 
+                // Force play Death animation from the start
+                anim.Play("Die", 0, 0);
                 anim.SetTrigger("death");
+                
                 SoundManager.instance.playeSound(deathSound);
             }
         }
@@ -72,12 +74,18 @@ namespace COMP305
         {
             dead = false;
             AddHealth(startingHealth);
-            // anim.ResetTrigger("death");
+
+            // Reactivate collider
+            GetComponent<Collider2D>().enabled = true;
+
+            // Reset animation parameters properly
             ResetAnimatorParameters();
+            anim.SetBool("IsIdle", true);
             anim.Play("Idle");
+
             StartCoroutine(Invulnerability());
 
-            // Activate all the attached component classes
+            // Reactivate all attached components
             foreach (Behaviour component in components)
             {
                 component.enabled = true;
@@ -114,7 +122,6 @@ namespace COMP305
             anim.SetBool("IsGrounded", false);
             anim.ResetTrigger("hurt");
             anim.ResetTrigger("death");
-            
         }
     }
 }
