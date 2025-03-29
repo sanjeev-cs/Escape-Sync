@@ -30,6 +30,7 @@ namespace COMP305
         [Header("Coyote Time Parameters")]
         [SerializeField] private float coyoteTime = 0.2f; // Time allowance for jumping after falling
         private float fallTimeCounter; // Track the time after leaving the platform
+        private bool hasJumpedDuringCoyoteTime;
 
         [Header("Wall Jump Parameters")] 
         [SerializeField] private LayerMask wallLayer;
@@ -62,6 +63,8 @@ namespace COMP305
 
         private void Update()
         {
+            if (GetComponent<Health>().currentHealth <= 0) return; // Stop all movement if dead
+            
             IsOnGround(); // Check the player is on ground or not
             HandleMovement(); // Handles player movement input
             HandleJump(); // Handles jump and double jump
@@ -94,6 +97,7 @@ namespace COMP305
                 isJumping = false;
                 isFalling = false;
                 canDoubleJump = false;
+                hasJumpedDuringCoyoteTime = false; // Reset flag when grounded
                 fallTimeCounter = coyoteTime; // Reset coyote time on ground
             }
             else 
@@ -156,17 +160,23 @@ namespace COMP305
         {
             if (Input.GetKeyDown(jumpKey)) // Check if jump key is pressed
             {
-                if (isGrounded || fallTimeCounter > 0) // Allow jump during coyote time
+                if (isGrounded)
                 {
-                    Jump(jumpForce); // Perform normal jump
-                    canDoubleJump = true; // Allow double jump
+                    Jump(jumpForce);
+                    canDoubleJump = true;
                 }
-                else if (canDoubleJump && isJumping)
+                else if (fallTimeCounter > 0 && !hasJumpedDuringCoyoteTime) // Allow only one coyote jump
                 {
-                    Jump(doubleJumpForce); // Perform double jump
-                    canDoubleJump = false; // Disable further double jumps
+                    Jump(jumpForce);
+                    hasJumpedDuringCoyoteTime = true; // Prevent additional jumps within coyote time
+                    canDoubleJump = true;
                 }
-                else if (IsOnWall() && wallJumpCooldown <=0)
+                else if(canDoubleJump && isJumping)
+                {
+                    Jump(doubleJumpForce);
+                    canDoubleJump = false;
+                }
+                else if(IsOnWall() && wallJumpCooldown > 0)
                 {
                     WallJump();
                 }

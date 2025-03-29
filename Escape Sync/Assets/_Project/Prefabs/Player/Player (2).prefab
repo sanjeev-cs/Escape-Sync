@@ -102,7 +102,6 @@ GameObject:
   - component: {fileID: 1999726242535362877}
   - component: {fileID: 610876426716395370}
   - component: {fileID: 2798894189441233397}
-  - component: {fileID: 4085748447103608456}
   - component: {fileID: 8008051303684228029}
   m_Layer: 6
   m_Name: Player (2)
@@ -216,7 +215,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.004336834, y: -0.039450623}
+  m_Offset: {x: 0.0061906576, y: -0.039450623}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -226,7 +225,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2189436, y: 0.24373184}
+  m_Size: {x: 0.22265124, y: 0.24373184}
   m_EdgeRadius: 0
 --- !u!50 &3403064535554198450
 Rigidbody2D:
@@ -253,7 +252,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &1999726242535362877
 Animator:
@@ -290,18 +289,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 4
-  doubleJumpForce: 3
+  doubleJumpForce: 4
   runSpeed: 1
-  airControlFactor: 0.5
+  airControlFactor: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  extraHeight: 0.1
+  extraHeight: 0.5
+  coyoteTime: 0.8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  wallJumpForce: 0.5
   leftKey: 276
   rightKey: 275
-  jumpKey: 256
-  interactKey: 303
-  attackKey: 0
+  jumpKey: 273
+  interactKey: 256
+  attackKey: 303
 --- !u!114 &2798894189441233397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,34 +318,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b6a32f84342de4e89214dd95896413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
-  iFramesDuration: 2
+  startingHealth: 3
+  iFramesDuration: 1
   numberOfFlashes: 3
   components:
-  - {fileID: 0}
-  deathSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
-  hurtSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
---- !u!114 &4085748447103608456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5282655447657825456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfaa3055cb589264587a328ee3fe2f80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDelay: 1
-  playerAttackSound: {fileID: 0}
-  range: 1.5
-  damage: 1
-  colliderDistance: 0.16
-  boxCollider: {fileID: 1545266762791426215}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  - {fileID: 610876426716395370}
+  deathSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
+  hurtSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
 --- !u!114 &8008051303684228029
 MonoBehaviour:
   m_ObjectHideFlags: 0
