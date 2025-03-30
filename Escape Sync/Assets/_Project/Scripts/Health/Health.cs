@@ -132,6 +132,7 @@ namespace COMP305
             anim.SetBool("IsGrounded", false);
             anim.ResetTrigger("hurt");
             anim.ResetTrigger("death");
+            Physics2D.IgnoreLayerCollision(6, 10, false);
         }
 
         public void ComponentManager(string action)

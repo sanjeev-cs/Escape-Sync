@@ -1430,6 +1430,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6042320869803424981, guid: a2b49ed473a54ca488924d2cb197ab90, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042320869803424981, guid: a2b49ed473a54ca488924d2cb197ab90, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7141438987338911084, guid: a2b49ed473a54ca488924d2cb197ab90, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2868,10 +2880,6 @@ PrefabInstance:
       value: Player (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9658
-      objectReference: {fileID: 0}
-    - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.241
       objectReference: {fileID: 0}
@@ -2912,21 +2920,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
-      propertyPath: startingHealth
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
-      propertyPath: components.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: 'components.Array.data[1]'
       value: 
       objectReference: {fileID: 1554927515}
-    - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
-      propertyPath: 'components.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1813836018}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15183,11 +15179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6740788126754908620, guid: 57c9c87e862fcca4e9cace563d71f088, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6740788126754908620, guid: 57c9c87e862fcca4e9cace563d71f088, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7355483879679977170, guid: 57c9c87e862fcca4e9cace563d71f088, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15294,21 +15290,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
-      propertyPath: startingHealth
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
-      propertyPath: components.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: 'components.Array.data[1]'
       value: 
       objectReference: {fileID: 1554927515}
-    - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
-      propertyPath: 'components.Array.data[2]'
-      value: 
-      objectReference: {fileID: 1421518419}
     - target: {fileID: 4331276175320714483, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.639
@@ -15369,11 +15353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b6a32f84342de4e89214dd95896413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &1421518419 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1545266762791426215, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
-  m_PrefabInstance: {fileID: 1421518413}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1422954913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19789,11 +19768,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806404220}
   m_CullTransparentMesh: 1
---- !u!61 &1813836018 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7877410612223399519, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
-  m_PrefabInstance: {fileID: 271940470}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1818138951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23194,8 +23168,12 @@ PrefabInstance:
       value: Spike
       objectReference: {fileID: 0}
     - target: {fileID: 6740788126754908620, guid: 57c9c87e862fcca4e9cace563d71f088, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740788126754908620, guid: 57c9c87e862fcca4e9cace563d71f088, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7355483879679977170, guid: 57c9c87e862fcca4e9cace563d71f088, type: 3}
       propertyPath: m_LocalPosition.x

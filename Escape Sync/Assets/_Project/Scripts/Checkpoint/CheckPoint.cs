@@ -34,7 +34,7 @@ namespace COMP305
             if (!playersAtCheckpoint.Contains(player))
             {
                 playersAtCheckpoint.Add(player);
-                Debug.Log(player.gameObject.name + " reached checkpoint: " + gameObject.name);
+                // Debug.Log(player.gameObject.name + " reached checkpoint: " + gameObject.name);
             }
 
             // Activate the checkpoint only when both players are there

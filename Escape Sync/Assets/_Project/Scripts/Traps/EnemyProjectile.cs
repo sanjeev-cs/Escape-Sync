@@ -33,7 +33,7 @@ namespace COMP305
             // Only deactivate if hitting non-player objects or after hitting both players
                 if (collision.CompareTag("Player") || collision.CompareTag("Ground"))
                 {
-                    Debug.Log("Arrow Collide with: " + collision.gameObject.name);
+                    // Debug.Log("Arrow Collide with: " + collision.gameObject.name);
                     gameObject.SetActive(false);
                 }
         }

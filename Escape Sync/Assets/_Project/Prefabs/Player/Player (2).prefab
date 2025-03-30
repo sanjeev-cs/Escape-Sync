@@ -318,11 +318,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b6a32f84342de4e89214dd95896413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 99999
+  startingHealth: 3
   iFramesDuration: 1
   numberOfFlashes: 3
   components:
   - {fileID: 610876426716395370}
+  - {fileID: 0}
   deathSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
   hurtSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
 --- !u!114 &8008051303684228029

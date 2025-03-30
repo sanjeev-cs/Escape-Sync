@@ -35,7 +35,7 @@ namespace COMP305
         }
         
         private void HandleDeathWithoutCheckpoint(){
-            Debug.Log("No checkpoint set. Game over.");
+            // Debug.Log("No checkpoint set. Game over.");
             playerHealth.ComponentManager("deactivate");
             playerHealth.ResetAnimatorParameters();
             UiManager.Instance.GameOver();

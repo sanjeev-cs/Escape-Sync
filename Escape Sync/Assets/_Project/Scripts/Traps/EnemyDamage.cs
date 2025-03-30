@@ -6,14 +6,14 @@ namespace COMP305
     public class Enemy_Damage : MonoBehaviour
     {
         [SerializeField] protected float damage; // Amount of damage the enemy will give to the player
-        private static readonly int Hurt = Animator.StringToHash("hurt");
+        // private static readonly int Hurt = Animator.StringToHash("hurt");
 
         // Mwthod to handle damage if player collided with the enemy
         protected void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
-                Debug.Log($"Hit player: {collision.gameObject.name}");
+                // Debug.Log($"Hit player: {collision.gameObject.name}");
                 var health = collision.GetComponent<Health>();
                 if (health == null)
                 {
@@ -23,7 +23,7 @@ namespace COMP305
                 {
                     health.TakeDamage(damage);
                     var anim = collision.GetComponent<Animator>();
-                    if (anim != null) anim.SetTrigger(Hurt);
+                    if (anim != null) anim.SetTrigger("hurt");
                 }
             }
         }

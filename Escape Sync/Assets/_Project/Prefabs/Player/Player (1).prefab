@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.42, y: -4.04, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.9658, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2412629772694084834}
@@ -231,11 +231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b6a32f84342de4e89214dd95896413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 99999
+  startingHealth: 3
   iFramesDuration: 1
   numberOfFlashes: 3
   components:
   - {fileID: 4220088220634853315}
+  - {fileID: 0}
   deathSound: {fileID: 8300000, guid: c8ff03843f78d2c46a6f58b84af2551d, type: 3}
   hurtSound: {fileID: 8300000, guid: 36b2c53e376f32a40b3cf922109710e9, type: 3}
 --- !u!114 &4541699781841916745
