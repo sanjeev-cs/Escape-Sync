@@ -13,9 +13,18 @@ namespace COMP305
         {
             if (collision.CompareTag("Player"))
             {
-                collision.GetComponent<Health>().TakeDamage(damage);
-                var anim = collision.GetComponent<Animator>();
-                anim.SetTrigger(Hurt);
+                Debug.Log($"Hit player: {collision.gameObject.name}");
+                var health = collision.GetComponent<Health>();
+                if (health == null)
+                {
+                    Debug.LogError("No Health component found on player!");
+                }
+                else
+                {
+                    health.TakeDamage(damage);
+                    var anim = collision.GetComponent<Animator>();
+                    if (anim != null) anim.SetTrigger(Hurt);
+                }
             }
         }
     }
