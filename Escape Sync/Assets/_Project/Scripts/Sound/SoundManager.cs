@@ -38,15 +38,51 @@ namespace COMP305
             ChangeSoundVolume(0);
         }
 
-        public void playeSound(AudioClip _sound)
+        public void PlaySound(AudioClip _sound, bool shouldLoop = false)
         {
             if (_sound != null)
             {
-                soundSource.PlayOneShot(_sound);
+                if (shouldLoop)
+                {
+                    // For looping sounds, use Play() instead of PlayOneShot()
+                    soundSource.clip = _sound;
+                    soundSource.loop = true; // Enable looping
+                    soundSource.Play();
+                }
+                else
+                {
+                    // Default behavior (one-shot)
+                    soundSource.PlayOneShot(_sound);
+                }
             }
             else
             {
                 Debug.LogError("Sound clip is null!");
+            }
+        }
+
+        // New method to stop all sound effects
+        public void StopAllSounds()
+        {
+            if (soundSource != null)
+            {
+                soundSource.Stop();
+            }
+        }
+
+        // Optional: Method to stop specific sound
+        public void StopSound(AudioClip _sound)
+        {
+            // This is more complex and would require tracking active sounds
+            // For simple implementation, use StopAllSounds()
+        }
+
+        // Optional: Method to stop music
+        public void StopMusic()
+        {
+            if (musicSource != null && musicSource.isPlaying)
+            {
+                musicSource.Stop();
             }
         }
 

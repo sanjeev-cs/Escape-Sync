@@ -10,7 +10,7 @@ namespace COMP305
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
         private static readonly int IsJumping = Animator.StringToHash("IsJumping");
 
-        private Animator animator;
+        public Animator animator;
         private Rigidbody2D rb;
         private BoxCollider2D boxCollider;
 

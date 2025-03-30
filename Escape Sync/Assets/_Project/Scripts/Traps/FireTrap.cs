@@ -70,7 +70,7 @@ namespace COMP305
 
             // Wait for delay, activate trap, turn on animation, return color back to the normal
             yield return new WaitForSeconds(activationDelay);
-            SoundManager.instance.playeSound(fireTrapSound);
+            SoundManager.instance.PlaySound(fireTrapSound);
             spriteRend.color = Color.white;
             active = true;
             anim.SetBool("activated", true);

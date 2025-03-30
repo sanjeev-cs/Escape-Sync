@@ -8,7 +8,7 @@ namespace COMP305
         private AudioClip checkpointSound;
 
         private Health playerHealth;
-        
+        private bool hasCheckpoint = false;
         private void Awake()
         {
             playerHealth = GetComponent<Health>();
@@ -16,16 +16,29 @@ namespace COMP305
 
         public void Respawn()
         {
+            // Only attempt respawn if we have a checkpoint
+            if (!hasCheckpoint)
+            {
+                HandleDeathWithoutCheckpoint();
+                return;
+            }
+            
             Transform checkpoint = Checkpoint.GetLastActivatedCheckpoint();
             if (checkpoint == null)
             {
-                Debug.Log("No checkpoint set. Respawn failed.");
-                UiManager.Instance.GameOver(); // Access through the static Instance
+                HandleDeathWithoutCheckpoint();
                 return;
             }
 
             transform.position = checkpoint.position; // Move player to last activated checkpoint
             playerHealth.Respawn(); // Restore health
+        }
+        
+        private void HandleDeathWithoutCheckpoint(){
+            Debug.Log("No checkpoint set. Game over.");
+            playerHealth.ComponentManager("deactivate");
+            playerHealth.ResetAnimatorParameters();
+            UiManager.Instance.GameOver();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -40,6 +53,8 @@ namespace COMP305
                 }
 
                 checkpoint.PlayerReachedCheckpoint(this);
+                hasCheckpoint = true;
+                SoundManager.instance.PlaySound(checkpointSound);
             }
         }
     }
