@@ -21,7 +21,7 @@ namespace COMP305
             // Play sound if any players are in the zone
             if (playersInTrapZone > 0)
             {
-                SoundManager.instance.playeSound(arrowTrapSound);
+                SoundManager.instance.PlaySound(arrowTrapSound);
             }
 
             arrows[FindArrow()].transform.position = firePoint.position;

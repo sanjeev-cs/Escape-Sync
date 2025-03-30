@@ -40,7 +40,7 @@ namespace COMP305
                 {
                     coolDownTimer = 0;
                     anim.SetTrigger("attack");
-                    SoundManager.instance.playeSound(goblinAttackSound);
+                    SoundManager.instance.PlaySound(goblinAttackSound);
                 }
             }
 

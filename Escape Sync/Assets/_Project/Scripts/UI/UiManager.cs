@@ -28,7 +28,7 @@ namespace COMP305
         public void GameOver()
         {
             gameOverPanel.SetActive(true);
-            SoundManager.instance.playeSound(gameOverSound);
+            SoundManager.instance.PlaySound(gameOverSound, false);
         }
     }
 }

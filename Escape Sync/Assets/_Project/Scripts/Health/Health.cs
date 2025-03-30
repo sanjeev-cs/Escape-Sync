@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace COMP305
@@ -33,34 +34,34 @@ namespace COMP305
 
         public void TakeDamage(float _damage)
         {
-            if (invulnerable) return;
-            // Reduce health and clamp it between 0 and starting health.
+            // Early exit if shouldn't take damage
+            if (invulnerable || dead) return;
+    
             currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
             if (currentHealth > 0)
             {
-                // Trigger hurt animation and start invulnerability.
+                // Hurt logic
                 anim.SetTrigger("hurt");
                 StartCoroutine(Invulnerability());
-                SoundManager.instance.playeSound(hurtSound);
+                PlaySoundIfAlive(hurtSound);
             }
             else if (!dead)
             {
+                // Death logic
                 dead = true;
-                // Deactivate all the attached component classes
-                foreach (Behaviour component in components)
-                {
-                    component.enabled = false;
-                }
-                
-                // Reset all animator parameters
+                ComponentManager("deactivate");
                 ResetAnimatorParameters();
-
-                // Force play Death animation from the start
                 anim.Play("Die", 0, 0);
                 anim.SetTrigger("death");
-                
-                SoundManager.instance.playeSound(deathSound);
+            }
+        }
+
+        private void PlaySoundIfAlive(AudioClip clip)
+        {
+            if (!dead && SoundManager.instance != null)
+            {
+                SoundManager.instance.PlaySound(clip);
             }
         }
 
@@ -86,10 +87,7 @@ namespace COMP305
             StartCoroutine(Invulnerability());
 
             // Reactivate all attached components
-            foreach (Behaviour component in components)
-            {
-                component.enabled = true;
-            }
+            ComponentManager("activate");
         }
 
         private IEnumerator Invulnerability()
@@ -113,7 +111,7 @@ namespace COMP305
             gameObject.SetActive(false);
         }
         
-        private void ResetAnimatorParameters()
+        public void ResetAnimatorParameters()
         {
             anim.SetBool("IsIdle", false);
             anim.SetBool("IsRunning", false);
@@ -122,6 +120,28 @@ namespace COMP305
             anim.SetBool("IsGrounded", false);
             anim.ResetTrigger("hurt");
             anim.ResetTrigger("death");
+        }
+
+        public void ComponentManager(string action)
+        {
+            switch (action)
+            {
+                case "activate":
+                    foreach (Behaviour component in components)
+                    {
+                        component.enabled = true;
+                    }
+                    break;
+                case "deactivate":
+                    foreach (Behaviour component in components)
+                    {
+                        component.enabled = false;
+                    }
+                    break;
+                default:
+                    Debug.Log("Invalid Action");
+                    break;
+            }
         }
     }
 }

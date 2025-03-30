@@ -30,7 +30,12 @@ namespace COMP305
         {
             // Logic for what happens when the projectile collides with something.
             base.OnTriggerEnter2D(collision); //  Execute the logic from the parent script first
-            gameObject.SetActive(false); // Deactivate the arrow when hit something
+            // Only deactivate if hitting non-player objects or after hitting both players
+                if (collision.CompareTag("Player") || collision.CompareTag("Ground"))
+                {
+                    Debug.Log("Arrow Collide with: " + collision.gameObject.name);
+                    gameObject.SetActive(false);
+                }
         }
     }
 }

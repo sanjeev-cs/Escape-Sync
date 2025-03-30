@@ -61,7 +61,7 @@ namespace COMP305
 
     private void Attack()
     {
-        SoundManager.instance.playeSound(playerAttackSound);
+        SoundManager.instance.PlaySound(playerAttackSound);
         // anim.SetTrigger("attack"); // Trigger the attack animation.
         DamageEnemy();
         Debug.Log("Inside Attack");

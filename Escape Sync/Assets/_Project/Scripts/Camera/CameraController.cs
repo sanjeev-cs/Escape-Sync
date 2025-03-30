@@ -32,8 +32,8 @@ namespace COMP305
         {
             if (targets.Count < 2) return; // Ensure that we have two players before proceeding
             Follow(); // Call the function to move the camera
-            Debug.Log(targets[0].transform.position.x);
-            Debug.Log(targets[1].transform.position.x);
+            // Debug.Log(targets[0].transform.position.x);
+            // Debug.Log(targets[1].transform.position.x);
         }
         
         // Moves the camera smoothly to follow both players while keeping them in view.

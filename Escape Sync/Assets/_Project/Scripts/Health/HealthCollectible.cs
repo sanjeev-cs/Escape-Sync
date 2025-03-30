@@ -12,7 +12,7 @@ namespace COMP305
         {
             if (collision.tag == "Player")
             {
-                SoundManager.instance.playeSound(healthCollectibleSound);
+                SoundManager.instance.PlaySound(healthCollectibleSound);
                 collision.GetComponent<Health>().AddHealth(healthValue);
                 gameObject.SetActive(false);
             }

@@ -61,7 +61,7 @@ namespace COMP305
             // Play sound only when both players activate it
             if (SoundManager.instance != null && checkpointSound != null)
             {
-                SoundManager.instance.playeSound(checkpointSound);
+                SoundManager.instance.PlaySound(checkpointSound);
             }
 
             Debug.Log("Checkpoint " + gameObject.name + " activated for both players!");
