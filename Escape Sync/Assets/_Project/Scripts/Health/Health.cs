@@ -54,6 +54,18 @@ namespace COMP305
                 ResetAnimatorParameters();
                 anim.Play("Die", 0, 0);
                 anim.SetTrigger("death");
+                
+                Transform checkpoint = Checkpoint.GetLastActivatedCheckpoint();
+                if (checkpoint != null)
+                {
+                    // Respawn after the animation
+                    Invoke(nameof(Respawn), 1.5f); // Adjust delay to match the death animation
+                }
+                else
+                {
+                    // No checkpoint, disable the player
+                    Invoke(nameof(Deactivate), 1.5f);
+                }
             }
         }
 

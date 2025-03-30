@@ -5,12 +5,12 @@ namespace COMP305
 {
     public class PlayerController : MonoBehaviour
     {
-        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
-        private static readonly int IsIdle = Animator.StringToHash("IsIdle");
-        private static readonly int IsFalling = Animator.StringToHash("IsFalling");
-        private static readonly int IsJumping = Animator.StringToHash("IsJumping");
+        // private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        // private static readonly int IsIdle = Animator.StringToHash("IsIdle");
+        // private static readonly int IsFalling = Animator.StringToHash("IsFalling");
+        // private static readonly int IsJumping = Animator.StringToHash("IsJumping");
 
-        public Animator animator;
+        private Animator animator;
         private Rigidbody2D rb;
         private BoxCollider2D boxCollider;
 
@@ -171,10 +171,10 @@ namespace COMP305
 
         private void HandleAnimations()
         {
-            animator.SetBool(IsRunning, Mathf.Abs(rb.linearVelocity.x) > 0.1f && isGrounded);
-            animator.SetBool(IsIdle, Mathf.Abs(rb.linearVelocity.x) < 0.1f && isGrounded);
-            animator.SetBool(IsJumping, isJumping); 
-            animator.SetBool(IsFalling, isFalling); 
+            animator.SetBool("IsRunning", Mathf.Abs(rb.linearVelocity.x) > 0.1f && isGrounded);
+            animator.SetBool("IsIdle", Mathf.Abs(rb.linearVelocity.x) < 0.1f && isGrounded);
+            animator.SetBool("IsJumping", isJumping); 
+            animator.SetBool("IsFalling", isFalling); 
         }
 
         private void HandleInteraction()
