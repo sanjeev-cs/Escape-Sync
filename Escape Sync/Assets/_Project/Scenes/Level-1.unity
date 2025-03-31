@@ -2879,6 +2879,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4220088220634853315, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220088220634853315, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
+      propertyPath: doubleJumpForce
+      value: 3.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.241
@@ -15289,6 +15297,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 610876426716395370, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 610876426716395370, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
+      propertyPath: doubleJumpForce
+      value: 3.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: 'components.Array.data[1]'
       value: 
@@ -22486,6 +22502,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1018325998}
     m_Modifications:
+    - target: {fileID: 1434156870365150579, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
+      propertyPath: m_Size.x
+      value: 0.17048258
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434156870365150579, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0015645176
+      objectReference: {fileID: 0}
     - target: {fileID: 3361700957576460567, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: m_Name
       value: Jump
