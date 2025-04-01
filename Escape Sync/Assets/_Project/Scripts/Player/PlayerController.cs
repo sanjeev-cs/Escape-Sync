@@ -41,6 +41,9 @@ namespace COMP305
         [SerializeField] private KeyCode jumpKey;
         [SerializeField] private KeyCode interactKey;
         [SerializeField] private KeyCode attackKey;
+        
+        [Header("Sounds")]
+        [SerializeField] private AudioClip jumpSound;
 
         private void Start()
         {
@@ -134,26 +137,34 @@ namespace COMP305
         {
             if (Input.GetKeyDown(jumpKey))
             {
+                
+                
+                
                 if (isGrounded)
                 {
                     Jump(jumpForce);
                     canDoubleJump = true;  // Enable double jump after first jump
+                }
+                else if (IsOnWall() && wallJumpCooldown <= 0)
+                {
+                    WallJump();
                 }
                 else if (canDoubleJump)
                 {
                     Jump(doubleJumpForce);
                     canDoubleJump = false; // Disable further double jumps
                 }
-                else if (!canDoubleJump && IsOnWall() && wallJumpCooldown <= 0)
-                {
-                    WallJump();
-                }
+                // else if (!canDoubleJump && IsOnWall() && wallJumpCooldown <= 0)
+                // {
+                //     WallJump();
+                // }
             }
         }
 
         private void Jump(float force)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
+            SoundManager.instance.PlaySound(jumpSound);
             isGrounded = false;
             isJumping = true;
             isFalling = false;

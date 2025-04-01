@@ -50,7 +50,7 @@ namespace COMP305
             {
                 // Death logic
                 dead = true;
-                ComponentManager("deactivate");
+                // ComponentManager("deactivate");
                 ResetAnimatorParameters();
                 anim.Play("Die", 0, 0);
                 anim.SetTrigger("death");
