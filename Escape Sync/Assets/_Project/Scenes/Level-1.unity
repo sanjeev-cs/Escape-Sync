@@ -2897,7 +2897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4220088220634853315, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: doubleJumpForce
-      value: 3.8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2941,7 +2941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: startingHealth
-      value: 9999
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6909950390108000588, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: 'components.Array.data[1]'
@@ -15948,7 +15948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 610876426716395370, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: doubleJumpForce
-      value: 3.8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1545266762791426215, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: m_Size.x
@@ -15960,7 +15960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: startingHealth
-      value: 9999
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2798894189441233397, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: 'components.Array.data[1]'
@@ -19392,6 +19392,18 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 271940471}
+    - target: {fileID: 1536486591694456966, guid: 175e1b42b9ec57e4d85f834eadd4c926, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 147
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151875960733546011, guid: 175e1b42b9ec57e4d85f834eadd4c926, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 147.00006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151875960733546011, guid: 175e1b42b9ec57e4d85f834eadd4c926, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -69.41998
+      objectReference: {fileID: 0}
     - target: {fileID: 5645676114314161060, guid: 175e1b42b9ec57e4d85f834eadd4c926, type: 3}
       propertyPath: m_Name
       value: Canvas

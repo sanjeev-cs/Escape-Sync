@@ -9,7 +9,12 @@ namespace COMP305
         public void Switch(){
             Debug.Log("Start Game Button Clicked");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        }
+        
+        public void Switch1(){
+            Debug.Log("Start Game Button Clicked");
+            SceneManager.LoadScene("Level-1");
+        }
         public void Run() {
             Debug.Log("Start Game Button Clicked");
         }

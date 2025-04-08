@@ -137,9 +137,6 @@ namespace COMP305
         {
             if (Input.GetKeyDown(jumpKey))
             {
-                
-                
-                
                 if (isGrounded)
                 {
                     Jump(jumpForce);
@@ -154,10 +151,6 @@ namespace COMP305
                     Jump(doubleJumpForce);
                     canDoubleJump = false; // Disable further double jumps
                 }
-                // else if (!canDoubleJump && IsOnWall() && wallJumpCooldown <= 0)
-                // {
-                //     WallJump();
-                // }
             }
         }
 
@@ -172,12 +165,14 @@ namespace COMP305
 
         private void WallJump()
         {
-            float wallDirection = transform.localScale.x > 0 ? -1 : 1;
-            rb.linearVelocity = new Vector2(wallDirection * wallJumpForce, jumpForce);
-            wallJumpCooldown = 0.2f; // Set cooldown to prevent instant re-jump
-            // canDoubleJump = true;
-            isJumping = true;
-            isFalling = false;
+            if (wallJumpCooldown <= 0)
+            {   
+                float wallDirection = transform.localScale.x > 0 ? -1 : 1;
+                rb.velocity = new Vector2(wallDirection * wallJumpForce, jumpForce);
+                wallJumpCooldown = 0.2f; // Set cooldown to prevent instant re-jump
+                isJumping = true;
+                isFalling = false;
+            }
         }
 
         private void HandleAnimations()

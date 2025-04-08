@@ -1745,7 +1745,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 959603884}
         m_TargetAssemblyTypeName: COMP305.Switch_Scene, Assembly-CSharp
-        m_MethodName: Switch
+        m_MethodName: Switch1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
