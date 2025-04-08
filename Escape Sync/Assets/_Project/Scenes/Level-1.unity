@@ -15644,7 +15644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921522330441864366, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: bouncForce
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3361700957576460567, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: m_Name
@@ -16646,7 +16646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921522330441864366, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: bouncForce
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3361700957576460567, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: m_Name
@@ -21381,7 +21381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1938412043
 Transform:
   m_ObjectHideFlags: 0
@@ -22533,7 +22533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921522330441864366, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: bouncForce
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3361700957576460567, guid: ee1547da3a5cd874c866889d9624214d, type: 3}
       propertyPath: m_Name
