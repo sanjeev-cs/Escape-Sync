@@ -24,7 +24,7 @@ namespace COMP305
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private float groundLayerDetectionDistance = 0.009f;
 
-        [Header("Wall Jump Parameters")] 
+        [Header("Wall Jump Parameters")]
         [SerializeField] private LayerMask wallLayer;
         [SerializeField] private float wallLayerDetectionDistance = 0.1f;
         [SerializeField] private float wallJumpForce = 5f;
@@ -35,13 +35,16 @@ namespace COMP305
         private bool isJumping;
         private bool isFalling;
 
+        private bool requestJump = false;
+        private bool requestDoubleJump = false;
+
         [Header("Player Controls")]
         [SerializeField] private KeyCode leftKey;
         [SerializeField] private KeyCode rightKey;
         [SerializeField] private KeyCode jumpKey;
         [SerializeField] private KeyCode interactKey;
         [SerializeField] private KeyCode attackKey;
-        
+
         [Header("Sounds")]
         [SerializeField] private AudioClip jumpSound;
 
@@ -58,10 +61,11 @@ namespace COMP305
 
             IsOnGround();
             HandleMovement();
-            HandleJump();
             HandleAnimations();
             HandleInteraction();
             IgnoreCollision();
+
+            HandleJumpInput();
 
             if (wallJumpCooldown > 0)
             {
@@ -69,13 +73,18 @@ namespace COMP305
             }
         }
 
+        private void FixedUpdate()
+        {
+            HandleJumpExecution();
+        }
+
         private void IsOnGround()
         {
             RaycastHit2D hit = Physics2D.BoxCast(
-                boxCollider.bounds.center, 
-                boxCollider.bounds.size, 
-                0, 
-                Vector2.down, 
+                boxCollider.bounds.center,
+                boxCollider.bounds.size,
+                0,
+                Vector2.down,
                 groundLayerDetectionDistance,
                 groundLayer
             );
@@ -89,7 +98,7 @@ namespace COMP305
                 isFalling = false;
                 canDoubleJump = false;
             }
-            else if(!isGrounded && rb.linearVelocity.y < 0)
+            else if (!isGrounded && rb.linearVelocity.y < 0)
             {
                 isFalling = true;
             }
@@ -105,7 +114,7 @@ namespace COMP305
                 wallLayerDetectionDistance,
                 wallLayer
             );
-                
+
             return hit.collider != null;
         }
 
@@ -133,26 +142,38 @@ namespace COMP305
             }
         }
 
-        private void HandleJump()
+        private void HandleJumpInput()
         {
             if (Input.GetKeyDown(jumpKey))
             {
                 if (isGrounded)
                 {
-                    Debug.Log("Double Jumping: " + canDoubleJump);
-                    Jump(jumpForce);
-                    canDoubleJump = true;  // Enable double jump after first jump
+                    requestJump = true;
+                    canDoubleJump = true;
                 }
                 else if (IsOnWall() && wallJumpCooldown <= 0)
                 {
-                    WallJump();
+                    WallJump(); // keep this here since it's quick
                 }
                 else if (canDoubleJump)
                 {
-                    Debug.Log("Double Jumping: " + canDoubleJump);
-                    Jump(doubleJumpForce);
-                    canDoubleJump = false; // Disable further double jumps
+                    requestDoubleJump = true;
+                    canDoubleJump = false;
                 }
+            }
+        }
+
+        private void HandleJumpExecution()
+        {
+            if (requestJump)
+            {
+                Jump(jumpForce);
+                requestJump = false;
+            }
+            else if (requestDoubleJump)
+            {
+                Jump(doubleJumpForce);
+                requestDoubleJump = false;
             }
         }
 
@@ -168,7 +189,7 @@ namespace COMP305
         private void WallJump()
         {
             if (wallJumpCooldown <= 0)
-            {   
+            {
                 float wallDirection = transform.localScale.x > 0 ? -1 : 1;
                 rb.linearVelocity = new Vector2(wallDirection * wallJumpForce, jumpForce);
                 wallJumpCooldown = 0.2f; // Set cooldown to prevent instant re-jump
@@ -181,8 +202,8 @@ namespace COMP305
         {
             animator.SetBool("IsRunning", Mathf.Abs(rb.linearVelocity.x) > 0.1f && isGrounded);
             animator.SetBool("IsIdle", Mathf.Abs(rb.linearVelocity.x) < 0.1f && isGrounded);
-            animator.SetBool("IsJumping", isJumping); 
-            animator.SetBool("IsFalling", isFalling); 
+            animator.SetBool("IsJumping", isJumping);
+            animator.SetBool("IsFalling", isFalling);
         }
 
         private void HandleInteraction()
@@ -213,7 +234,7 @@ namespace COMP305
 
         private void IgnoreCollision()
         {
-            Physics2D.IgnoreLayerCollision(6, 6, true); 
+            Physics2D.IgnoreLayerCollision(6, 6, true);
         }
 
         // Add this method to your script
