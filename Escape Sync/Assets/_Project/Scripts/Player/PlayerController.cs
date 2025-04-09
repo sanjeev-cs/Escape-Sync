@@ -22,7 +22,7 @@ namespace COMP305
 
         [Header("Ground Detection")]
         [SerializeField] private LayerMask groundLayer;
-        [SerializeField] private float groundLayerDetectionDistance = 0.1f;
+        [SerializeField] private float groundLayerDetectionDistance = 0.009f;
 
         [Header("Wall Jump Parameters")] 
         [SerializeField] private LayerMask wallLayer;
@@ -139,6 +139,7 @@ namespace COMP305
             {
                 if (isGrounded)
                 {
+                    Debug.Log("Double Jumping: " + canDoubleJump);
                     Jump(jumpForce);
                     canDoubleJump = true;  // Enable double jump after first jump
                 }
@@ -148,6 +149,7 @@ namespace COMP305
                 }
                 else if (canDoubleJump)
                 {
+                    Debug.Log("Double Jumping: " + canDoubleJump);
                     Jump(doubleJumpForce);
                     canDoubleJump = false; // Disable further double jumps
                 }
