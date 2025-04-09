@@ -168,7 +168,7 @@ namespace COMP305
             if (wallJumpCooldown <= 0)
             {   
                 float wallDirection = transform.localScale.x > 0 ? -1 : 1;
-                rb.velocity = new Vector2(wallDirection * wallJumpForce, jumpForce);
+                rb.linearVelocity = new Vector2(wallDirection * wallJumpForce, jumpForce);
                 wallJumpCooldown = 0.2f; // Set cooldown to prevent instant re-jump
                 isJumping = true;
                 isFalling = false;
