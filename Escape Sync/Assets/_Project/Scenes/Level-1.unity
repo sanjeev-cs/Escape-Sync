@@ -2899,6 +2899,14 @@ PrefabInstance:
       propertyPath: doubleJumpForce
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4220088220634853315, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
+      propertyPath: wallLayerDetectionDistance
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220088220634853315, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
+      propertyPath: groundLayerDetectionDistance
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 6555558235839479637, guid: e7cc9ec810f7e1d4993c1f66b58ae692, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.241
@@ -15949,6 +15957,14 @@ PrefabInstance:
     - target: {fileID: 610876426716395370, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: doubleJumpForce
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 610876426716395370, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
+      propertyPath: wallLayerDetectionDistance
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 610876426716395370, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
+      propertyPath: groundLayerDetectionDistance
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 1545266762791426215, guid: fd4690bb5ed08814fbbc1efd0bd62ac2, type: 3}
       propertyPath: m_Size.x
